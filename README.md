@@ -156,7 +156,7 @@ router.get('/partnumber/:partnumber', function(req, res, next) {
 
 [http://localhost:4000/parts/partnumber/1](http://localhost:4000/parts/partnumber/1)
 
-[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
+[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts/partnumber/1)
 
 ### Deployment:
 #### Github
