@@ -1,11 +1,91 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<%- include ('partials/header') %>
+
+<body>
+
+    <%- include ('partials/nav') %>
+
+    <div class="container-fluid bg-dark text-light p-5">
+        <div class="container bg-dark p-5" id="home">
+            <h1 class="display-1">Parts925 REST API</h1>
+            <hr>
+            <p>
+                The Parts925 REST API is an application programming interface provided by Parts Central, which allows
+                developers to interact with the parts and components database programmatically. It enables you to access
+                various resources and perform operations on them using HTTP methods such as GET, POST, PUT, and DELETE.
+            </p>
+            <a href="#documentation" class="btn btn-primary">Documentation</a>
+        </div>
+
+        <div class="container p-5" id="features">
+            <h1 class="display-4">Features</h1>
+            <hr>
+            <p>
+                Here are some key features and functionalities of the Parts925 REST API:
+            </p>
+
+            <h2 class="display-6">
+                Parts Catalog:
+            </h2>
+            <p>
+                The API provides access to the comprehensive parts catalog offered by Parts Central. You can retrieve information about different parts, including their names, descriptions, specifications, prices, availability, and more.
+            </p>
+
+            <h2 class="display-6">
+                Search and Filtering:
+            </h2>
+            <p>
+                The API allows you to search for specific parts based on various criteria, such as part numbers, keywords, categories, manufacturers, or any other relevant attributes. This helps you find the exact parts you need quickly and efficiently.
+            </p>
+
+            <h2 class="display-6">
+                Inventory Management:
+            </h2>
+            <p>
+                With the API, you can retrieve real-time information about the availability and stock levels of various parts. This helps you keep track of inventory and ensure that you have the necessary parts in stock.
+            </p>
+
+            <h2 class="display-6">
+                Pricing and Ordering:
+            </h2>
+            <p>
+                The API provides pricing information for parts, allowing you to calculate costs or display prices to your customers. Additionally, you can place orders for parts programmatically, streamlining the procurement process.
+            </p>
+
+            <h2 class="display-6">
+                Authentication and Security:
+            </h2>
+            <p>
+                To access the API, you may need to authenticate your requests using API keys or other authentication mechanisms provided by Parts Central. This ensures the security and integrity of the data being exchanged.
+            </p>
+
+            <h2 class="display-6">
+                Error Handling:
+            </h2>
+            <p>
+                The API returns appropriate HTTP status codes and error messages to help you identify and handle any issues that may arise during API interactions.
+            </p>
+
+            <h2 class="display-6">
+                Documentation and Support
+            </h2>
+            <p>
+                Parts925 provides comprehensive documentation that outlines the API endpoints, request/response formats, authentication requirements, and examples. In case you have any questions or encounter difficulties, they typically offer support channels to assist developers integrating their API.
+            </p>
+        </div>
+
+        <div class="container p-5" id="documentation">
+            <h1 class="display-4">Documentation</h1>
+            <hr>
+            <p>
+                Here are some key features and functionalities of the Parts925 REST API:
+            </p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+</body>
+
 </html>

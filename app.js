@@ -21,14 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// db.any('SELECT * FROM public."Test"', [true])
-//   .then(function(data) {
-//       console.log(data); // print data;
-//   })
-//   .catch(function(error) {
-//     console.log(error); // print error;
-//   });
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -49,14 +49,12 @@ This will generate a website with a simple file structure that looks like this:
 └── views
 ```
 
-
 ### Working with Supabase
 
-Sign in to Supabase and create a new project. Then, retrieve the URL and API key from the project settings page. You will need these to connect to your database. Carefully store the generated password and URL in a secure location. You will need these to connect to your database.
+For convenience, the remote deployment of this project access a PostgreSQL database hosted on Supabase. If you wish to replicate this, sign in to Supabase and create a new project. Then, retrieve the URL and API key from the project settings page. You will need these to connect to your database. Carefully store the generated password and URL in a secure location. You will need these to connect to your database. 
 
 #### Retrieving the postgres server URL from the project settings page:
-The connection string can be retrieved from the project settings page. Click on the project settings icon in the left sidebar, then click on the "Database" tab. The connection string is displayed under the "Connection string" heading.
-![Retrieving the postgres connection URL from Supabase](creenshots./../screenshots/supabase_connection_string.png)
+The connection string can be retrieved from the project settings page. Click on the project settings icon in the left sidebar, then click on the "Database" tab. The connection string is displayed at the top of the page. These are the values that you will need to connect to your remote database.
 
 ### Creating a .env file:
 
@@ -66,6 +64,8 @@ To store environment variables, create a .env file in the root directory of your
 DB_PASS=[your database password]
 DB_URL=[your database url]
 ```
+
+If you are working with a local copy of the database, DB_URL will be something like localhost:5432. If you are working with a remote database, DB_URL will be something like [your-project-name].supabase.co.
 
 ### PostgreSQL
 
@@ -98,6 +98,40 @@ Then create a new database object named `db` using the `pgp` function and the da
 var db = pgp(`postgres://postgres:${dbPass}@${dbUrl}:5432/postgres`)
 ```
 
+## Querying the Database:
+A simple example of a query is retrieving all of the data from the `Parts925` table. This can be done by specifying the route and the query in `routes/parts.js`:
+```js
+var express = require('express');
+var router = express.Router();
+
+var db = require('../database/db');
+
+/* GET parts page. */
+router.get('/', function(req, res, next) {
+    db.any('SELECT * FROM public."Parts925"', [true])
+        .then(function(data) {
+            res.json(data);
+        })
+        .catch(function(error) {
+            res.json(error);
+        });
+});
+
+module.exports = router;
+```
+
+This file is referenced in `app.js`:
+```js
+var partsRouter = require('./routes/parts');
+
+app.use('/parts', partsRouter);
+```
+
+This loads the data from the `Parts925` database and displays it in JSON format at the `/parts` route.
+
+So, if you are to visit the base URL of the project (by default runs on port 3000), you will see the data from the `Parts925` table displayed in JSON format:
+
+[http://localhost:4000/parts](http://localhost:4000/parts)
 
 
 ### Deployment:
@@ -105,7 +139,7 @@ var db = pgp(`postgres://postgres:${dbPass}@${dbUrl}:5432/postgres`)
 For ease of integration with Repl.it, I have deployed the application on Github. You can view the publi c repository [here](https://github.com/LiamOsler/postgres-express-REST)
 
 #### Repl.it
-For ease of access, I have deployed the application on Repl.it. You can view the application [here]().
+For ease of access, I have deployed the application on the online IDE/deployment platform Repl.it. You can view the application [here](https://postgres-express-rest.liamo2.repl.co/) and you can view the IDE with the code [here](https://replit.com/@LiamO2/postgres-express-REST). Note, if the application is not dormant, it may take a second to start running.
 
 ##### Deployment Pipeline:
 When a commit is pushed to the main branch, the application is automatically deployed to Repl.it. The most recent version of the application can be viewed [here](). 

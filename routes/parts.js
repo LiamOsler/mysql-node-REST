@@ -5,14 +5,13 @@ var db = require('../database/db');
 
 /* GET parts page. */
 router.get('/', function(req, res, next) {
-    db.any('SELECT * FROM public."Parts_925"', [true])
+    db.any('SELECT * FROM public."Parts925"', [true])
         .then(function(data) {
-            console.log(data); // print data;
+            res.json(data);
         })
         .catch(function(error) {
-            console.log(error); // print error;
+            res.json(error);
         });
-  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
