@@ -90,7 +90,6 @@ Then, require set the values database password and url from the environment vari
 ```js
 var dbPass = process.env.DB_PASS;
 var dbUrl = process.env.DB_URL;
-
 ```
 
 Then create a new database object named `db` using the `pgp` function and the database url:
@@ -108,12 +107,13 @@ var db = require('../database/db');
 
 /* GET parts page. */
 router.get('/', function(req, res, next) {
-    db.any('SELECT * FROM public."Parts925"', [true])
+    db.any(`SELECT * FROM public.parts_925`, [true])
         .then(function(data) {
             res.json(data);
         })
         .catch(function(error) {
-            res.json(error);
+            res.status(500);
+            res.send(error);
         });
 });
 
@@ -133,6 +133,30 @@ So, if you are to visit the base URL of the project (by default runs on port 300
 
 [http://localhost:4000/parts](http://localhost:4000/parts)
 
+[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
+
+Say for instance you wanted to retrieve the data from the `Parts925` table where the `id` is equal to 1. You can do this by specifying the route and the query in `routes/parts.js`:
+```js
+/* GET parts page. */
+router.get('/partnumber/:partnumber', function(req, res, next) {
+    var partNumber = req.params.partnumber;
+
+    db.any(`SELECT * FROM public.parts_925 WHERE "part_number" = $1 `, [partNumber])
+        .then(function(data) {
+            res.json(data);
+        })
+        .catch(function(error) {
+            res.status(500);
+            res.send(error);
+        });
+});
+```
+
+`/partnumber/:partnumber` corresponds to the route `/partnumber/` followed by a part number. So, if you are to visit the following URL, you will see the data from the `Parts925` table where the `part_number` is equal to the part number specified in the URL:
+
+[http://localhost:4000/parts/partnumber/1](http://localhost:4000/parts/partnumber/1)
+
+[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
 
 ### Deployment:
 #### Github
