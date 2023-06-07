@@ -5,16 +5,6 @@
     <%- include ('partials/nav') %>
 
     <div class="container-fluid bg-dark text-light p-5">
-        <div class="container bg-dark p-5" id="home">
-            <h1 class="display-1">Parts925 REST API</h1>
-            <hr>
-            <p>
-                The Parts925 REST API is an application programming interface provided by Parts Central, which allows
-                developers to interact with the parts and components database programmatically. It enables you to access
-                various resources and perform operations on them using HTTP methods such as GET, POST, PUT, and DELETE.
-            </p>
-            <a href="#documentation" class="btn btn-primary">Documentation</a>
-        </div>
 
         <div class="container p-5" id="documentation">
             <h1>Background</h1>
@@ -45,9 +35,30 @@
             <li>Submit a purchase order by invocation of a method that takes the purchase order number as a parameter.</li>
             </ul>
             <h2>API Endpoints</h2>
-            <p><strong>GET</strong> parts
-            <a href="http://localhost:3000/parts">http://localhost:3000/parts</a>
-            <a href="https://postgres-express-rest.liamo2.repl.co/parts">https://postgres-express-rest.liamo2.repl.co/parts</a></p>
+            <h3>GET</h3>
+            <h4>Parts:</h4>
+            <p><strong>GET</strong>
+            All parts:
+            /parts</p>
+            <p>ex:</p>
+            <p><a href="http://localhost:3000/parts">http://localhost:3000/parts</a></p>
+            <p><a href="https://postgres-express-rest.liamo2.repl.co/parts">https://postgres-express-rest.liamo2.repl.co/parts</a></p>
+            <p>Part by part number:
+            /parts/number/:number</p>
+            <p>ex:</p>
+            <p><a href="http://localhost:4000/parts/number/1">http://localhost:4000/parts/number/1</a></p>
+            <p><a href="https://postgres-express-rest.liamo2.repl.co/parts/number/1">https://postgres-express-rest.liamo2.repl.co/parts/number/1</a></p>
+            <h4>Purchase Orders:</h4>
+            <p>All purchase orders:
+            /pos</p>
+            <p>ex:</p>
+            <p><a href="http://localhost:4000/pos">http://localhost:4000/pos</a></p>
+            <p><a href="https://postgres-express-rest.liamo2.repl.co/pos">https://postgres-express-rest.liamo2.repl.co/pos</a></p>
+            <p>Purchase order by purchase order number number:
+            /pos/number/:number</p>
+            <p>ex:
+            <a href="http://localhost:4000/pos/number/1">http://localhost:4000/pos/number/1</a></p>
+            <p><a href="https://postgres-express-rest.liamo2.repl.co/pos/number/1">https://postgres-express-rest.liamo2.repl.co/pos/number/1</a></p>
             <h2>Features</h2>
             <p>Here are some key features and functionalities of the Parts925 REST API:</p>
             <h3>Parts Catalog:</h3>
@@ -133,7 +144,7 @@
             
             /* GET all parts */
             router.get('/', function(req, res, next) {
-                db.any(`SELECT * FROM public.parts925`, [true])
+                db.any(`SELECT part_number, part_name, part_description FROM public.parts925`, [true])
                     .then(function(data) {
                         res.json(data);
                     })
@@ -167,7 +178,6 @@
                         res.send(error);
                     });
             });
-            
             </code></pre>
             <p><code>/number/:number</code> corresponds to the route <code>parts/number/</code> followed by a part number. So, if you are to visit the following URL, you will see the data from the <code>Parts925</code> table where the <code>part_number</code> is equal to the part number specified in the URL:</p>
             <p><a href="http://localhost:4000/parts/number/1">http://localhost:4000/parts/number/1</a></p>
@@ -199,7 +209,147 @@
             
         </div>
 
+        <div class = "container p-5" id = "interface">
+            <h2>Clients</h2>
+            <h2>Get all clients:</h2>
+            <form id = "get-clients">
+              <input type="submit" value="Get">
+            </form>
+            <br>
+            <h2>Get by clientID:</h2>
+            <form id = "find-client">
+              <label for="user-id">Customer _id:</label><br>
+              <input type="text" id="client-id" name="client-id" required><br><br>
+              <input type="submit" value="Submit">
+            </form>
+            <br>
+            <h2>Create new client:</h2>
+            <form id = "create-client">
+                <label for="client-name">Client Name:</label><br>
+                <input type="text" id="client-name" name="client-name" required><br>
+                <label for="client-city">Client City:</label><br>
+                <input type="text" id="client-city" name="client-city" required><br><br>
+                <input type="submit" value="Submit">
+            </form>
+            <br>
+            <h2>Update client:</h2>
+            <form id = "update-client">
+                <label for="client-id-update">Client _id:</label><br>
+                <input type="text" id="client-id-update" name="client-id-update" required><br>
+                <label for="client-name-update">Client Name:</label><br>
+                <input type="text" id="client-name-update" name="client-name-update" required><br>
+                <label for="client-city-update">Client City:</label><br>
+                <input type="text" id="client-city-update" name="client-city-update" required><br><br>
+                <input type="submit" value="Submit">
+            </form>
+            <br>
+            <h2>Delete client:</h2>
+            <form id = "delete-client">
+                <label for="client-id-delete">Client _id:</label><br>
+                <input type="text" id="client-id-delete" name="client-id-delete" required><br><br>
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>
+
     </div>
+
+    <script>
+        var findClient = document.getElementById('find-client');
+        findClient.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var clientID = document.getElementById('client-id').value;
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/clients/id/' + clientID, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              alert('Client Found:' + xhr.responseText);
+            } else {
+              alert('Error: ' + xhr.status);
+            }
+          };
+          xhr.send();
+        });
+      
+        var getClients = document.getElementById('get-clients');
+        
+        getClients.addEventListener('submit', function(e) {
+          e.preventDefault();
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/clients/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              alert('Clients Found:' + xhr.responseText);
+            } else {
+              alert('Error: ' + xhr.status);
+            }
+          };
+          xhr.send();
+        });
+
+        var createClient = document.getElementById('create-client');
+        createClient.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var clientName = document.getElementById('client-name').value;
+          var clientCity = document.getElementById('client-city').value;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/clients/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              alert('Client Created:' + xhr.responseText);
+            } else {
+              alert('Error: ' + xhr.status);
+            }
+          };
+            xhr.send(JSON.stringify({client_name: clientName, client_city: clientCity}));
+        });
+
+        var updateClient = document.getElementById('update-client');
+        updateClient.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var clientID = document.getElementById('client-id-update').value;
+          var clientName = document.getElementById('client-name-update').value;
+          var clientCity = document.getElementById('client-city-update').value;
+
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('PUT', '/clients/id/' + clientID, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              alert('Client Updated:' + xhr.responseText);
+            } else {
+              alert('Error: ' + xhr.status);
+            }
+          };
+            xhr.send(JSON.stringify({client_name: clientName, client_city: clientCity}));
+        });
+
+        var deleteClient = document.getElementById('delete-client');
+        deleteClient.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var clientID = document.getElementById('client-id-delete').value;
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('DELETE', '/clients/id/' + clientID, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              alert('Client Deleted:' + xhr.responseText);
+            } else {
+              alert('Error: ' + xhr.status);
+            }
+          };
+          xhr.send();
+        });
+        
+      </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
