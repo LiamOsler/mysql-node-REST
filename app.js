@@ -6,7 +6,11 @@ var logger = require('morgan');
 var pgp = require('pg-promise')();
 
 var indexRouter = require('./routes/index');
+var clientsRouter = require('./routes/clients');
 var partsRouter = require('./routes/parts');
+var posRouter = require('./routes/pos');
+var linesRouter = require('./routes/lines');
+
 
 var app = express();
 
@@ -22,7 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
+app.use('/clients', clientsRouter);
 app.use('/parts', partsRouter);
+app.use('/pos', posRouter);
+app.use('/lines', linesRouter);
 
 
 // catch 404 and forward to error handler
