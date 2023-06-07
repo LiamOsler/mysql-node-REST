@@ -1,8 +1,49 @@
 # Background
-
 ## Task:
-Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase Order database. The application should be built using Node.js, Express.js and PostgreSQL.
+Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
 
+Clients are able to 
+- List parts, 
+- Prepare a purchase order, 
+- Submit a purchase order for a number of parts
+- Query the status of a purchase order
+
+Functionality:
+- List parts for sale
+  - Returns list of parts, including part number, description, etc.
+  - Excludes quantity on hand
+- Find information about a specific part given the part number.
+- List information about purchase orders
+- Prepare a purchase order
+    - User enters information about the purchase order, including part number, quantity, etc.
+- Submit a purchase order by invocation of a method that takes the purchase order number as a parameter.
+
+
+## API Endpoints
+
+**GET** parts
+[http://localhost:3000/parts](http://localhost:3000/parts)
+[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
+
+
+
+## Features
+
+Here are some key features and functionalities of the Parts925 REST API:
+
+### Parts Catalog:
+
+
+The API provides access to the comprehensive parts catalog offered by Parts Central. You can retrieve information about different parts, including their names, descriptions, specifications, prices, availability, and more.
+
+### Search and Filtering:
+
+The API allows you to search for specific parts based on various criteria, such as part numbers, keywords, categories, manufacturers, or any other relevant attributes. This helps you find info about parts quickly and efficiently.
+
+
+### Error Handling:
+
+The API returns appropriate HTTP status codes and error messages to help you identify and handle any issues that may arise during API interactions.
 
 
 ### Technical Inventory
@@ -98,21 +139,20 @@ var db = pgp(`postgres://postgres:${dbPass}@${dbUrl}:5432/postgres`)
 ```
 
 ## Querying the Database:
-A simple example of a query is retrieving all of the data from the `Parts925` table. This can be done by specifying the route and the query in `routes/parts.js`:
+A simple example of a query is retrieving all of the data from the `parts925` table. This can be done by specifying the route and the query in `routes/parts.js`:
 ```js
 var express = require('express');
 var router = express.Router();
 
 var db = require('../database/db');
 
-/* GET parts page. */
+/* GET all parts */
 router.get('/', function(req, res, next) {
-    db.any(`SELECT * FROM public.parts_925`, [true])
+    db.any(`SELECT * FROM public.parts925`, [true])
         .then(function(data) {
             res.json(data);
         })
         .catch(function(error) {
-            res.status(500);
             res.send(error);
         });
 });
@@ -127,21 +167,21 @@ var partsRouter = require('./routes/parts');
 app.use('/parts', partsRouter);
 ```
 
-This loads the data from the `Parts925` database and displays it in JSON format at the `/parts` route.
+This loads the data from the `parts925` table and displays it in JSON format at the `/parts` route.
 
-So, if you are to visit the base URL of the project (by default runs on port 3000), you will see the data from the `Parts925` table displayed in JSON format:
+So, if you are to visit the base URL of the project (by default runs on port 4000), you will see the data from the `parts925` table displayed in JSON format:
 
 [http://localhost:4000/parts](http://localhost:4000/parts)
 
 [https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
 
-Say for instance you wanted to retrieve the data from the `Parts925` table where the `id` is equal to 1. You can do this by specifying the route and the query in `routes/parts.js`:
+Say for instance you wanted to retrieve the data from the `parts925` table where the `id` is equal to 1. You can do this by specifying the route and the query in `routes/parts.js`:
 ```js
-/* GET parts page. */
-router.get('/partnumber/:partnumber', function(req, res, next) {
-    var partNumber = req.params.partnumber;
+/* GET parts by part number */
+router.get('/number/:number', function(req, res, next) {
+    var partNumber = req.params.number;
 
-    db.any(`SELECT * FROM public.parts_925 WHERE "part_number" = $1 `, [partNumber])
+    db.any(`SELECT part_name, part_number, part_number_cpu, part_description FROM public.parts925 WHERE "part_number" = $1 `, [partNumber])
         .then(function(data) {
             res.json(data);
         })
@@ -150,13 +190,27 @@ router.get('/partnumber/:partnumber', function(req, res, next) {
             res.send(error);
         });
 });
+
 ```
 
-`/partnumber/:partnumber` corresponds to the route `/partnumber/` followed by a part number. So, if you are to visit the following URL, you will see the data from the `Parts925` table where the `part_number` is equal to the part number specified in the URL:
+`/number/:number` corresponds to the route `parts/number/` followed by a part number. So, if you are to visit the following URL, you will see the data from the `Parts925` table where the `part_number` is equal to the part number specified in the URL:
 
-[http://localhost:4000/parts/partnumber/1](http://localhost:4000/parts/partnumber/1)
+[http://localhost:4000/parts/number/1](http://localhost:4000/parts/number/1)
 
-[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts/partnumber/1)
+[https://postgres-express-rest.liamo2.repl.co/parts/number/1](https://postgres-express-rest.liamo2.repl.co/parts/number/1)
+
+This will provide a JSON response with the data from the `Parts925` table where the `part_number` is equal to 1:
+
+```json
+[{
+    "created_at": "2023-06-07T00:00:51.664Z",
+    "part_name": "Ryzen Threadripper 2990WX",
+    "part_number": "1",
+    "part_number_cpu": "25765",
+    "part_description": null,
+    "quantity_on_hand": "10"
+}]
+```
 
 ### Deployment:
 #### Github
@@ -164,9 +218,6 @@ For ease of integration with Repl.it, I have deployed the application on Github.
 
 #### Repl.it
 For ease of access, I have deployed the application on the online IDE/deployment platform Repl.it. You can view the application [here](https://postgres-express-rest.liamo2.repl.co/) and you can view the IDE with the code [here](https://replit.com/@LiamO2/postgres-express-REST). Note, if the application is not dormant, it may take a second to start running.
-
-##### Deployment Pipeline:
-When a commit is pushed to the main branch, the application is automatically deployed to Repl.it. The most recent version of the application can be viewed [here](). 
 
 # References
 ## Blogs, tutorials and videos:

@@ -16,236 +16,189 @@
             <a href="#documentation" class="btn btn-primary">Documentation</a>
         </div>
 
-        <div class="container p-5" id="features">
-            <h1 class="display-4">Features</h1>
-            <hr>
-            <p>
-                Here are some key features and functionalities of the Parts925 REST API:
-            </p>
-
-            <h2 class="display-6">
-                Parts Catalog:
-            </h2>
-            <p>
-                The API provides access to the comprehensive parts catalog offered by Parts Central. You can retrieve
-                information about different parts, including their names, descriptions, specifications, prices,
-                availability, and more.
-            </p>
-
-            <h2 class="display-6">
-                Search and Filtering:
-            </h2>
-            <p>
-                The API allows you to search for specific parts based on various criteria, such as part numbers,
-                keywords, categories, manufacturers, or any other relevant attributes. This helps you find the exact
-                parts you need quickly and efficiently.
-            </p>
-
-            <h2 class="display-6">
-                Inventory Management:
-            </h2>
-            <p>
-                With the API, you can retrieve real-time information about the availability and stock levels of various
-                parts. This helps you keep track of inventory and ensure that you have the necessary parts in stock.
-            </p>
-
-            <h2 class="display-6">
-                Pricing and Ordering:
-            </h2>
-            <p>
-                The API provides pricing information for parts, allowing you to calculate costs or display prices to
-                your customers. Additionally, you can place orders for parts programmatically, streamlining the
-                procurement process.
-            </p>
-
-            <h2 class="display-6">
-                Authentication and Security:
-            </h2>
-            <p>
-                To access the API, you may need to authenticate your requests using API keys or other authentication
-                mechanisms provided by Parts Central. This ensures the security and integrity of the data being
-                exchanged.
-            </p>
-
-            <h2 class="display-6">
-                Error Handling:
-            </h2>
-            <p>
-                The API returns appropriate HTTP status codes and error messages to help you identify and handle any
-                issues that may arise during API interactions.
-            </p>
-
-            <h2 class="display-6">
-                Documentation and Support
-            </h2>
-            <p>
-                Parts925 provides comprehensive documentation that outlines the API endpoints, request/response formats,
-                authentication requirements, and examples. In case you have any questions or encounter difficulties,
-                they typically offer support channels to assist developers integrating their API.
-            </p>
-        </div>
-
         <div class="container p-5" id="documentation">
             <h1>Background</h1>
             <h2>Task:</h2>
-            <p>Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase
-                Order database. The application should be built using Node.js, Express.js and PostgreSQL.</p>
+            <p>Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.</p>
+            <p>Clients are able to</p>
+            <ul>
+            <li>List parts,</li>
+            <li>Prepare a purchase order,</li>
+            <li>Submit a purchase order for a number of parts</li>
+            <li>Query the status of a purchase order</li>
+            </ul>
+            <p>Functionality:</p>
+            <ul>
+            <li>List parts for sale
+            <ul>
+            <li>Returns list of parts, including part number, description, etc.</li>
+            <li>Excludes quantity on hand</li>
+            </ul>
+            </li>
+            <li>Find information about a specific part given the part number.</li>
+            <li>List information about purchase orders</li>
+            <li>Prepare a purchase order
+            <ul>
+            <li>User enters information about the purchase order, including part number, quantity, etc.</li>
+            </ul>
+            </li>
+            <li>Submit a purchase order by invocation of a method that takes the purchase order number as a parameter.</li>
+            </ul>
+            <h2>API Endpoints</h2>
+            <p><strong>GET</strong> parts
+            <a href="http://localhost:3000/parts">http://localhost:3000/parts</a>
+            <a href="https://postgres-express-rest.liamo2.repl.co/parts">https://postgres-express-rest.liamo2.repl.co/parts</a></p>
+            <h2>Features</h2>
+            <p>Here are some key features and functionalities of the Parts925 REST API:</p>
+            <h3>Parts Catalog:</h3>
+            <p>The API provides access to the comprehensive parts catalog offered by Parts Central. You can retrieve information about different parts, including their names, descriptions, specifications, prices, availability, and more.</p>
+            <h3>Search and Filtering:</h3>
+            <p>The API allows you to search for specific parts based on various criteria, such as part numbers, keywords, categories, manufacturers, or any other relevant attributes. This helps you find info about parts quickly and efficiently.</p>
+            <h3>Error Handling:</h3>
+            <p>The API returns appropriate HTTP status codes and error messages to help you identify and handle any issues that may arise during API interactions.</p>
             <h3>Technical Inventory</h3>
             <ul>
-                <li><strong>Node.js</strong>: A JavaScript runtime engine.</li>
-                <li><strong>Express</strong>: A web application framework for Node.js.
-                    <ul>
-                        <li><strong>EJS</strong>: A templating engine for Node.js.</li>
-                    </ul>
-                </li>
-                <li><strong>PostgreSQL</strong>: An open-source relational database management system.
-                    <ul>
-                        <li><strong>Supabase</strong>: A service that provides free database hosting for learning and
-                            prototyping.</li>
-                    </ul>
-                </li>
+            <li><strong>Node.js</strong>: A JavaScript runtime engine.</li>
+            <li><strong>Express</strong>: A web application framework for Node.js.
+            <ul>
+            <li><strong>EJS</strong>: A templating engine for Node.js.</li>
+            </ul>
+            </li>
+            <li><strong>PostgreSQL</strong>: An open-source relational database management system.
+            <ul>
+            <li><strong>Supabase</strong>: A service that provides free database hosting for learning and prototyping.</li>
+            </ul>
+            </li>
             </ul>
             <h3>Node.js:</h3>
-            <p>Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code
-                outside of a browser. Node.js lets developers use JavaScript to write command line tools and for
-                server-side scripting. Node.js is part of the &quot;JavaScript everywhere&quot; paradigm, unifying web
-                application development around a single programming language, rather than different languages for
-                server-side and client-side scripts. <a
-                    href="https://nodejs.org/en/docs/guides/getting-started-guide/">Here is a guide to getting started
-                    with Node.js</a>.</p>
+            <p>Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting. Node.js is part of the &quot;JavaScript everywhere&quot; paradigm, unifying web application development around a single programming language, rather than different languages for server-side and client-side scripts. <a href="https://nodejs.org/en/docs/guides/getting-started-guide/">Here is a guide to getting started with Node.js</a>.</p>
             <h3>Express.js</h3>
-            <p>Express has been called the de facto standard server framework for Node.js. Express provides a minimal
-                and flexible set of features for creating web applications and APIs. It provides a set of features like
-                routing, middleware, view system, etc. It simplifies the server creation process that can be used to
-                create a web application more easily and quickly. <a
-                    href="https://expressjs.com/en/starter/installing.html">Here is a guide to getting started with
-                    Express.js</a>.</p>
+            <p>Express has been called the de facto standard server framework for Node.js. Express provides a minimal and flexible set of features for creating web applications and APIs. It provides a set of features like routing, middleware, view system, etc. It simplifies the server creation process that can be used to create a web application more easily and quickly. <a href="https://expressjs.com/en/starter/installing.html">Here is a guide to getting started with Express.js</a>.</p>
             <h4>EJS</h4>
-            <p>EJS is a templating engine for Node.js. It allows you to embed JavaScript into HTML files. It is a simple
-                templating language that lets you generate HTML markup with plain JavaScript. <a
-                    href="https://ejs.co/#docs">Here is a guide to getting started with EJS</a>.</p>
-            <p>You can install express globally and use the express command to generate a new application by executing
-                the following command in your terminal:</p>
+            <p>EJS is a templating engine for Node.js. It allows you to embed JavaScript into HTML files. It is a simple templating language that lets you generate HTML markup with plain JavaScript. <a href="https://ejs.co/#docs">Here is a guide to getting started with EJS</a>.</p>
+            <p>You can install express globally and use the express command to generate a new application by executing the following command in your terminal:</p>
             <pre><code class="language-bash">npm install -g express-generator
             </code></pre>
             <p>or</p>
             <pre><code class="language-bash">npx express-generator
             </code></pre>
-            <p>Then, you can generate a new site in your current directory with the following command, specifying EJS as
-                the view engine:</p>
+            <p>Then, you can generate a new site in your current directory with the following command, specifying EJS as the view engine:</p>
             <pre><code>express --view=ejs
             </code></pre>
             <p>This will generate a website with a simple file structure that looks like this:</p>
-            <pre><code>
-.
-├── app.js
-├── bin
-│  └── www
-├── package.json
-├── public
-├── routes
-└── views
+            <pre><code>.
+            ├── app.js
+            ├── bin
+            │   └── www
+            ├── package.json
+            ├── public
+            ├── routes
+            └── views
             </code></pre>
             <h3>Working with Supabase</h3>
-            <p>For convenience, the remote deployment of this project access a PostgreSQL database hosted on Supabase.
-                If you wish to replicate this, sign in to Supabase and create a new project. Then, retrieve the URL and
-                API key from the project settings page. You will need these to connect to your database. Carefully store
-                the generated password and URL in a secure location. You will need these to connect to your database.
-            </p>
+            <p>For convenience, the remote deployment of this project access a PostgreSQL database hosted on Supabase. If you wish to replicate this, sign in to Supabase and create a new project. Then, retrieve the URL and API key from the project settings page. You will need these to connect to your database. Carefully store the generated password and URL in a secure location. You will need these to connect to your database.</p>
             <h4>Retrieving the postgres server URL from the project settings page:</h4>
-            <p>The connection string can be retrieved from the project settings page. Click on the project settings icon
-                in the left sidebar, then click on the &quot;Database&quot; tab. The connection string is displayed at
-                the top of the page. These are the values that you will need to connect to your remote database.</p>
+            <p>The connection string can be retrieved from the project settings page. Click on the project settings icon in the left sidebar, then click on the &quot;Database&quot; tab. The connection string is displayed at the top of the page. These are the values that you will need to connect to your remote database.</p>
             <h3>Creating a .env file:</h3>
-            <p>To store environment variables, create a .env file in the root directory of your project. The .env file
-                should contain the following variables:</p>
+            <p>To store environment variables, create a .env file in the root directory of your project. The .env file should contain the following variables:</p>
             <pre><code>DB_PASS=[your database password]
             DB_URL=[your database url]
             </code></pre>
-            <p>If you are working with a local copy of the database, DB_URL will be something like localhost:5432. If
-                you are working with a remote database, DB_URL will be something like [your-project-name].supabase.co.
-            </p>
+            <p>If you are working with a local copy of the database, DB_URL will be something like localhost:5432. If you are working with a remote database, DB_URL will be something like [your-project-name].supabase.co.</p>
             <h3>PostgreSQL</h3>
             <p>Install the <code>pg-promise</code> package:</p>
             <pre><code class="language-bash">npm install pg-promise
             </code></pre>
             <p>Include the <code>pg-promise</code> package in the list of required modules in <code>app.js</code>:</p>
-            <pre><code class="language-js">
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var pgp = require('pg-promise')();
+            <pre><code class="language-js">var createError = require('http-errors');
+            var express = require('express');
+            var path = require('path');
+            var cookieParser = require('cookie-parser');
+            var logger = require('morgan');
+            var pgp = require('pg-promise')();
             </code></pre>
-            <p>Then, require set the values database password and url from the environment variables in
-                <code>app.js</code> file:</p>
+            <p>Then, require set the values database password and url from the environment variables in <code>app.js</code> file:</p>
             <pre><code class="language-js">var dbPass = process.env.DB_PASS;
             var dbUrl = process.env.DB_URL;
-            
             </code></pre>
-            <p>Then create a new database object named <code>db</code> using the <code>pgp</code> function and the
-                database url:</p>
+            <p>Then create a new database object named <code>db</code> using the <code>pgp</code> function and the database url:</p>
             <pre><code class="language-js">var db = pgp(`postgres://postgres:${dbPass}@${dbUrl}:5432/postgres`)
             </code></pre>
             <h2>Querying the Database:</h2>
-            <p>A simple example of a query is retrieving all of the data from the <code>Parts925</code> table. This can
-                be done by specifying the route and the query in <code>routes/parts.js</code>:</p>
+            <p>A simple example of a query is retrieving all of the data from the <code>parts925</code> table. This can be done by specifying the route and the query in <code>routes/parts.js</code>:</p>
             <pre><code class="language-js">var express = require('express');
-var router = express.Router();
-
-var db = require('../database/db');
-
-/* GET parts page. */
-router.get('/', function(req, res, next) {
-    db.any('SELECT * FROM public.&quot;Parts925&quot;', [true])
-        .then(function(data) {
-            res.json(data);
-        })
-        .catch(function(error) {
-            res.json(error);
-        });
-});
-
-module.exports = router;
+            var router = express.Router();
+            
+            var db = require('../database/db');
+            
+            /* GET all parts */
+            router.get('/', function(req, res, next) {
+                db.any(`SELECT * FROM public.parts925`, [true])
+                    .then(function(data) {
+                        res.json(data);
+                    })
+                    .catch(function(error) {
+                        res.send(error);
+                    });
+            });
+            
+            module.exports = router;
             </code></pre>
             <p>This file is referenced in <code>app.js</code>:</p>
             <pre><code class="language-js">var partsRouter = require('./routes/parts');
             
             app.use('/parts', partsRouter);
             </code></pre>
-            <p>This loads the data from the <code>Parts925</code> database and displays it in JSON format at the
-                <code>/parts</code> route.</p>
-            <p>So, if you are to visit the base URL of the project (by default runs on port 3000), you will see the data
-                from the <code>Parts925</code> table displayed in JSON format:</p>
+            <p>This loads the data from the <code>parts925</code> table and displays it in JSON format at the <code>/parts</code> route.</p>
+            <p>So, if you are to visit the base URL of the project (by default runs on port 4000), you will see the data from the <code>parts925</code> table displayed in JSON format:</p>
             <p><a href="http://localhost:4000/parts">http://localhost:4000/parts</a></p>
-            <p><a
-                    href="https://postgres-express-rest.liamo2.repl.co/parts">https://postgres-express-rest.liamo2.repl.co/parts</a>
-            </p>
+            <p><a href="https://postgres-express-rest.liamo2.repl.co/parts">https://postgres-express-rest.liamo2.repl.co/parts</a></p>
+            <p>Say for instance you wanted to retrieve the data from the <code>parts925</code> table where the <code>id</code> is equal to 1. You can do this by specifying the route and the query in <code>routes/parts.js</code>:</p>
+            <pre><code class="language-js">/* GET parts by part number */
+            router.get('/number/:number', function(req, res, next) {
+                var partNumber = req.params.number;
+            
+                db.any(`SELECT part_name, part_number, part_number_cpu, part_description FROM public.parts925 WHERE &quot;part_number&quot; = $1 `, [partNumber])
+                    .then(function(data) {
+                        res.json(data);
+                    })
+                    .catch(function(error) {
+                        res.status(500);
+                        res.send(error);
+                    });
+            });
+            
+            </code></pre>
+            <p><code>/number/:number</code> corresponds to the route <code>parts/number/</code> followed by a part number. So, if you are to visit the following URL, you will see the data from the <code>Parts925</code> table where the <code>part_number</code> is equal to the part number specified in the URL:</p>
+            <p><a href="http://localhost:4000/parts/number/1">http://localhost:4000/parts/number/1</a></p>
+            <p><a href="https://postgres-express-rest.liamo2.repl.co/parts/number/1">https://postgres-express-rest.liamo2.repl.co/parts/number/1</a></p>
+            <p>This will provide a JSON response with the data from the <code>Parts925</code> table where the <code>part_number</code> is equal to 1:</p>
+            <pre><code class="language-json">[{
+                &quot;created_at&quot;: &quot;2023-06-07T00:00:51.664Z&quot;,
+                &quot;part_name&quot;: &quot;Ryzen Threadripper 2990WX&quot;,
+                &quot;part_number&quot;: &quot;1&quot;,
+                &quot;part_number_cpu&quot;: &quot;25765&quot;,
+                &quot;part_description&quot;: null,
+                &quot;quantity_on_hand&quot;: &quot;10&quot;
+            }]
+            </code></pre>
             <h3>Deployment:</h3>
             <h4>Github</h4>
-            <p>For ease of integration with Repl.it, I have deployed the application on Github. You can view the publi c
-                repository <a href="https://github.com/LiamOsler/postgres-express-REST">here</a></p>
+            <p>For ease of integration with Repl.it, I have deployed the application on Github. You can view the publi c repository <a href="https://github.com/LiamOsler/postgres-express-REST">here</a></p>
             <h4>Repl.it</h4>
-            <p>For ease of access, I have deployed the application on the online IDE/deployment platform Repl.it. You
-                can view the application <a href="https://postgres-express-rest.liamo2.repl.co/">here</a> and you can
-                view the IDE with the code <a href="https://replit.com/@LiamO2/postgres-express-REST">here</a>. Note, if
-                the application is not dormant, it may take a second to start running.</p>
-            <h5>Deployment Pipeline:</h5>
-            <p>When a commit is pushed to the main branch, the application is automatically deployed to Repl.it. The
-                most recent version of the application can be viewed <a href="">here</a>.</p>
+            <p>For ease of access, I have deployed the application on the online IDE/deployment platform Repl.it. You can view the application <a href="https://postgres-express-rest.liamo2.repl.co/">here</a> and you can view the IDE with the code <a href="https://replit.com/@LiamO2/postgres-express-REST">here</a>. Note, if the application is not dormant, it may take a second to start running.</p>
             <h1>References</h1>
             <h2>Blogs, tutorials and videos:</h2>
             <p>Net Ninja Express Tutorials:
-                https://www.youtube.com/watch?v=yXEesONd_54</p>
+            https://www.youtube.com/watch?v=yXEesONd_54</p>
             <h2>Documentation:</h2>
             <p>Node.js:
-                https://nodejs.org/en/</p>
+            https://nodejs.org/en/</p>
             <p>Express:
-                https://expressjs.com/en/guide/using-template-engines.html</p>
-
-
+            https://expressjs.com/en/guide/using-template-engines.html</p>
+            
         </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
