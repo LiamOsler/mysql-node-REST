@@ -78,7 +78,6 @@ router.delete('/id/:id', function(req, res, next) {
     db.any(`
         DELETE FROM public.clients925
         WHERE client_id=$1
-        RETURNING client_id, created_at, client_name, client_city;
     `, [clientId])
     .then(function(data) {
         res.json(data);

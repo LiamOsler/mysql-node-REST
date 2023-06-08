@@ -24,7 +24,9 @@ router.post('/', function(req, res, next) {
     db.any(`
         INSERT INTO public.parts925
         (created_at, part_name, part_description, quantity_on_hand)
-        VALUES(now(), $1, $2, $3);
+        VALUES(now(), $1, $2, $3)
+        RETURNING part_number, part_name, part_description, quantity_on_hand
+        ;
     `, [partName, partDescription, quantityOnHand])
     .then(function(data) {
         console.log(data);
@@ -64,7 +66,9 @@ router.put('/number/:number', function(req, res, next) {
     db.any(`
         UPDATE public.parts925
         SET part_name=$2, part_description=$3, quantity_on_hand=$4
-        WHERE part_number=$1;
+        WHERE part_number=$1
+        RETURNING part_number, part_name, part_description, quantity_on_hand
+        ;
     `, [partNumber, partName, partDescription, quantityOnHand])
     .then(function(data) {
         res.json(data);
@@ -80,7 +84,10 @@ router.delete('/number/:number', function(req, res, next) {
 
     db.any(`
         DELETE FROM public.parts925
-        WHERE part_number=$1;
+        WHERE part_number=$1
+        RETURNING part_number, part_name, part_description, quantity_on_hand
+
+        ;
     `, [partNumber])
     .then(function(data) {
         res.json(data);
