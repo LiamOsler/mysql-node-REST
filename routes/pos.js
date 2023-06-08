@@ -66,11 +66,11 @@ router.get('/number/:number/lines', function(req, res, next) {
     });
 });
 
+
 router.get('/number/:number/report', function(req, res, next) {
     var poNumber = req.params.number;
     db.any(`
-
-        
+        SELECT public.purchaseorder($1);
         `, [poNumber])
     .then(function(data) {
             res.json(data);
