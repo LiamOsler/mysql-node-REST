@@ -70,7 +70,7 @@
                 <div class = "col-12 col-xl-6">
                     <div class = "card p-3 h-100">    
                         <h2>Parts</h2>
-                        <div class = "row g-1">
+                        <div class = "row g-3">
                             <div class = "col col-12 col-sm-6 col-lg-6">
                                 <form class = "form-control h-100" id = "get-parts">
                                     <h2>Get all parts:</h2>
@@ -155,13 +155,41 @@
                             <div class = "col col-12 col-sm-6 col-lg-6">
                               <form class = "form-control h-100" id = "create-pos">
                                   <h2>Create new purchase order:</h2>
-                                  <label for="po-customer-create">po_customer:</label><br>
-                                  <input class = "form-control" type="text" id="po-number-create" name="po-number-create" required><br>
+                                  <label for="po-customer-create">client_id:</label><br>
+                                  <input class = "form-control" type="text" id="po-customer-create" name="po-customer-create" required><br>
                                   <label for="po-date-create">po_date:</label><br>
                                   <input class = "form-control" type="date" id="po-date-create" name="po-date-create" required><br>
                                   <input class = "form-control" type="submit" value="Post">
                               </form>
-                          </div>
+                            </div>
+                            
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id = "edit-pos">
+                                <h2>Edit a purchase order:</h2>
+                                <label for="po-number-edit">po_number:</label><br>
+                                <input class = "form-control" type="text" id="po-number-edit" name="po-number-edit" required><br>
+                                <label for="po-customer-edit">po_customer:</label><br>
+                                <input class = "form-control" type="text" id="po-customer-edit" name="po-customer-edit" required><br>
+                                <label for="po-date-edit">po_date:</label><br>
+                                <input class = "form-control" type="date" id="po-date-edit" name="po-date-edit" required><br>
+                                <input class = "form-control" type="submit" value="Update">
+                              </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id = "edit-pos">
+                                <h2>Add line to purchase order:</h2>
+                                <label for="po-number-add-line">po_number:</label><br>
+                                <input class = "form-control" type="text" id="po-number-add-line" name="po-number-add-line" required><br>
+                                <label for="part-number-add-line">part_number:</label><br>
+                                <input class = "form-control" type="text" id="part-number-add-line" name="part-number-add-line" required><br>
+                                <label for="quantity-add-line">quantity:</label><br>
+                                <input class = "form-control" type="text" id="quantity-add-line" name="quantity-add-line" required><br>
+                                <label for = "price-add-line">price:</label><br>
+                                
+                                <input class = "form-control" type="submit" value="Update">
+                              </form>
+                            </div>
 
                         </div>
                     </div>
@@ -380,11 +408,41 @@
         var createPOS = document.getElementById('create-pos');
         createPOS.addEventListener('submit', function(e) {
           e.preventDefault();
-          var poCustomer = document.getElementById('po-number-create').value;
+          var poCustomer = document.getElementById('po-customer-create').value;
           var poDate = document.getElementById('po-date-create').value;
-          var poStatus = document.getElementById('po-status-create').value;
         
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/pos/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Purchase Order Created:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send(JSON.stringify({po_customer:poCustomer, po_date:poDate}));
         }) 
+
+        var editPOS = document.getElementById('edit-pos');
+        editPOS.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var poNumber = document.getElementById('po-number-edit').value;
+          var poCustomer = document.getElementById('po-customer-edit').value;
+          var poDate = document.getElementById('po-date-edit').value;
+        
+          var xhr = new XMLHttpRequest();
+          xhr.open('PUT', '/pos/number/' + poNumber, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Purchase Order Updated:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send(JSON.stringify({po_number: poNumber, po_customer:poCustomer, po_date:poDate}));
+        })
 
 
         var getPOs = document.getElementById('get-pos');

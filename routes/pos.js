@@ -21,7 +21,9 @@ router.post('/', function(req, res, next) {
     db.any(`
         INSERT INTO public.pos925
         (created_at, po_date, client_id)
-        VALUES(now(), $1, $2);
+        VALUES(now(), $1, $2)
+        RETURNING po_number, po_date, client_id
+        ;
     `, [poDate, poCustomer])
     .then(function(data) {
         res.json(data);
@@ -50,7 +52,7 @@ router.get('/number/:number', function(req, res, next) {
 });
 
 router.put('/number/:number', function(req, res, next) {
-    var partNumber = req.params.number;
+    var poNumber = req.params.number;
     var poDate = req.body.po_date;
     var poCustomer = req.body.po_customer;
     
@@ -58,7 +60,7 @@ router.put('/number/:number', function(req, res, next) {
         UPDATE public.pos925
         SET  po_date=$2, client_id=$3
         WHERE po_number=$1;
-        `, [partNumber, poDate, poCustomer])
+        `, [poNumber, poDate, poCustomer])
         .then(function(data) {
             res.json(data);
         })
