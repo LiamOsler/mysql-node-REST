@@ -340,27 +340,92 @@
         </div>
 
         <div class="container text-white py-5">
-<h1>Background</h1>
-<p><strong>Author:</strong> Liam Osler
-<strong>Date:</strong> 2023-06-08</p>
 <p>This project is a RESTful API that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.</p>
+<h2>Contents</h2>
+<ul>
+<li><a href="#quick-start">Quick Start:</a>
+<ul>
+<li><a href="#run-locally">Run Locally:</a></li>
+<li><a href="#run-on-replit">Run on Repl.it:</a></li>
+</ul>
+</li>
+<li><a href="#description">Description:</a>
+<ul>
+<li><a href="#technical-inventory">Technical Inventory</a></li>
+</ul>
+</li>
+<li><a href="#api-endpoints">API Endpoints</a>
+<ul>
+<li><a href="#index">Index:</a>
+<ul>
+<li><a href="#path-">path: '/',</a></li>
+</ul>
+</li>
+<li><a href="#clients">Clients:</a>
+<ul>
+<li><a href="#path-clients">path: '/clients'</a></li>
+<li><a href="#path-clientsidid">path: '/clients/id/:id',</a></li>
+</ul>
+</li>
+<li><a href="#parts">Parts:</a>
+<ul>
+<li><a href="#path-parts">path: '/parts',</a></li>
+<li><a href="#path-partsnumbernumber">path: '/parts/number/:number'</a></li>
+</ul>
+</li>
+<li><a href="#purchase-orders">Purchase Orders:</a>
+<ul>
+<li><a href="#path-pos">path: '/pos',</a></li>
+<li><a href="#path-posnumbernumber">path: '/pos/number/:number',</a></li>
+<li><a href="#path-posnumbernumberreport">path: '/pos/number/:number/report',</a></li>
+</ul>
+</li>
+<li><a href="#purchase-order-lines">Purchase Order Lines:</a>
+<ul>
+<li><a href="#path-posnumbernumberlines">path: '/pos/number/:number/lines',</a></li>
+<li><a href="#path-lines">path: '/lines',</a></li>
+<li><a href="#path-linesnumbernumber">path: '/lines/number/:number',</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#defining-the-rest-middleware">Defining the REST middleware:</a>
+<ul>
+<li><a href="#creating-a-new-part">Creating a new part:</a></li>
+<li><a href="#updating-a-part">Updating a part:</a></li>
+<li><a href="#retrieving-a-purchase-order">Retrieving a purchase order:</a></li>
+<li><a href="#generating-a-purchase-order">Generating a purchase order:</a></li>
+</ul>
+</li>
+<li><a href="#deployment">Deployment:</a>
+<ul>
+<li><a href="#github">Github</a></li>
+<li><a href="#replit">Repl.it</a></li>
+</ul>
+</li>
+<li><a href="#references">References</a></li>
+</ul>
 <h2>Quick Start:</h2>
 <p>Repository:
-https://github.com/LiamOsler/postgres-express-REST.git</p>
+https://git.cs.dal.ca/osler/csci4140-assignment2</p>
+<p>Public Github repo for ease of access:
+https://github.com/LiamOsler/postgres-express-REST</p>
 <p>Replit deploy (includes documentation and GUI):
 https://postgres-express-rest.liamo2.repl.co/</p>
 <h3>Run Locally:</h3>
 <ol>
 <li>Clone the repository:
-<code>git clone https://github.com/LiamOsler/postgres-express-REST.git</code></li>
+<code>git clone https://git.cs.dal.ca/osler/csci4140-assignment2.git</code></li>
 <li>Import the postgres database dump from <code>dump.sql</code> to your postgres database</li>
 <li>Set the .env file to the correct database url and password</li>
 <li>Install dependencies:
 <code>npm install</code></li>
 <li>Start the server: <code>npm start</code></li>
-<li>Navigate to
-<a href="http://localhost:4000"><code>http://localhost:4000</code></a></li>
-<li>Use the API and GUI to interact with the database with the base URL <a href="http://localhost:4000"><code>http://localhost:4000</code></a>, e.g. <a href="http://localhost:4000/parts">http://localhost:4000/parts</a></li>
+<li>Navigate to <a href="http://localhost:4000"><code>http://localhost:4000</code></a> to see the index page and read this documentation.</li>
+<li>Use the API and GUI to interact with the database with the base URL
+<a href="http://localhost:4000"><code>http://localhost:4000</code></a>
+e.g.
+<a href="http://localhost:4000/parts"><code>http://localhost:4000/parts</code></a></li>
 </ol>
 <p>.env file (if your database is on localhost and the password is postgres)</p>
 <pre><code>DATABASE_URL=localhost
@@ -1016,7 +1081,7 @@ END;
   --url https://postgres-express-rest.liamo2.repl.co/pos/number/2/report
 </code></pre>
 <p>And you will get a plaintext response like this:</p>
-<pre><code class="language">po_number, client_name, date, lines
+<pre><code class="language-csv">po_number, client_name, date, lines
 John Doe,2023-06-05,[{line_number : 11, line_price : 123.99, line_quantity : 2, part_number : 2},{line_number : 12, line_price : 123.99, line_quantity : 4, part_number : 2}]
 </code></pre>
 <p>OR</p>
@@ -1031,7 +1096,6 @@ John Doe,2023-06-05,[{line_number : 11, line_price : 123.99, line_quantity : 2, 
 <h1>References</h1>
 <p>Net Ninja Express Tutorials:
 https://www.youtube.com/watch?v=yXEesONd_54</p>
-
         </div>
 
     </div>
