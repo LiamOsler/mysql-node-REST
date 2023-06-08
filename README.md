@@ -1,11 +1,42 @@
-# Background
-**Author:** Liam Osler
-**Date:** 2023-06-05
-**Course:** CSCI 4140
-**Assignment:** Assignment 2
-
 
 This project is a RESTful API that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
+
+<div class="pagebreak"> </div>
+
+# Table of Contents
+- [CSCI 4140 Assignment 2](#csci-4140-assignment-2)
+- [Table of Contents](#table-of-contents)
+  - [Quick Start:](#quick-start)
+    - [Run Locally:](#run-locally)
+    - [Run on Repl.it:](#run-on-replit)
+  - [Description:](#description)
+    - [Technical Inventory](#technical-inventory)
+  - [API Endpoints](#api-endpoints)
+    - [Index:](#index)
+      - [path: '/',](#path-)
+    - [Clients:](#clients)
+      - [path: '/clients'](#path-clients)
+      - [path: '/clients/id/:id',](#path-clientsidid)
+    - [Parts:](#parts)
+      - [path: '/parts',](#path-parts)
+      - [path: '/parts/number/:number'](#path-partsnumbernumber)
+    - [Purchase Orders:](#purchase-orders)
+      - [path: '/pos',](#path-pos)
+      - [path: '/pos/number/:number',](#path-posnumbernumber)
+      - [path: '/pos/number/:number/report',](#path-posnumbernumberreport)
+    - [Purchase Order Lines:](#purchase-order-lines)
+      - [path: '/pos/number/:number/lines',](#path-posnumbernumberlines)
+      - [path: '/lines',](#path-lines)
+      - [path: '/lines/number/:number',](#path-linesnumbernumber)
+  - [Defining the REST middleware:](#defining-the-rest-middleware)
+    - [Creating a new part:](#creating-a-new-part)
+    - [Updating a part:](#updating-a-part)
+    - [Retrieving a purchase order:](#retrieving-a-purchase-order)
+    - [Generating a purchase order:](#generating-a-purchase-order)
+    - [Deployment:](#deployment)
+      - [Github](#github)
+      - [Repl.it](#replit)
+- [References](#references)
 
 ## Quick Start:
 Repository:
