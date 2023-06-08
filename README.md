@@ -277,11 +277,6 @@ Post body:
 * **PostgreSQL**: An open-source relational database management system.
   * **Supabase**: A service that provides free database hosting for learning and prototyping.
 
-
-### Node.js:
-Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting. Node.js is part of the "JavaScript everywhere" paradigm, unifying web application development around a single programming language, rather than different languages for server-side and client-side scripts. [Here is a guide to getting started with Node.js](https://nodejs.org/en/docs/guides/getting-started-guide/).
-
-
 ### Editing the .env file:
 
 To store environment variables, create a .env file in the root directory of your project. The .env file should contain the following variables:
@@ -291,37 +286,12 @@ DB_PASS=[your database password]
 DB_URL=[your database url]
 ```
 
-If you are working with a local copy of the database, DB_URL will be something like localhost:5432. If you are working with a remote database, DB_URL will be something like [your-project-name].supabase.co.
+If you are working with a local copy of the database, DB_URL will be something like localhost:5432. If you are working with a remote database, DB_URL will be something like [your-project-name].supabase.co
 
 ### PostgreSQL
 
 Install the `pg-promise` package:
 
-```bash
-npm install pg-promise
-```
-
-Include the `pg-promise` package in the list of required modules in `app.js`:
-
-```js
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var pgp = require('pg-promise')();
-```
-
-Then, require set the values database password and url from the environment variables in `app.js` file:
-```js
-var dbPass = process.env.DB_PASS;
-var dbUrl = process.env.DB_URL;
-```
-
-Then create a new database object named `db` using the `pgp` function and the database url:
-```js
-var db = pgp(`postgres://postgres:${dbPass}@${dbUrl}:5432/postgres`)
-```
 
 ## Querying the Database:
 
