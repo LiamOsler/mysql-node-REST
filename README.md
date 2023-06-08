@@ -1,19 +1,42 @@
 # Background
+## Author: Liam Osler
+## Date: 2023-06-08
+
+This project is a RESTful API that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
+
+## Quick Start:
+
+### Run Locally:
+
+1. Clone the repository: `git clone https://github.com/LiamOsler/postgres-express-REST.git`
+2. Import the postgres database dump from `dump.sql`
+3. Set the .env file to the correct database url and password
+4. Install dependencies: `npm install`
+5. Start the server: `npm start`
+6. Navigate to [http://localhost:4000](http://localhost:4000)
+7. Use the API and GUI to interact with the database with the base URL [http://localhost:4000](http://localhost:4000), e.g. [http://localhost:4000/parts](http://localhost:4000/parts)
+
+### Run on Repl.it:
+
+1. Navigate to [https://repl.it/github/liamo2/postgres-express-rest](https://repl.it/github/liamo2/postgres-express-rest)
+2. Wait for the repl to start
+3. Use the API and GUI to interact with the database, e.g. [https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
+
 
 ## Task:
 Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
 
 Clients are able to 
-- List parts, 
-- Prepare a purchase order, 
+- List parts
+- Prepare a purchase order
 - Submit a purchase order for a number of parts
 - Query the status of a purchase order
 
 Functionality:
 - List parts for sale
-  - Returns list of parts, including part number, description, etc.
+  - Returns list of parts, including part number, description, etc
   - Excludes quantity on hand
-- Find information about a specific part given the part number.
+- Find information about a specific part given the part number
 - List information about purchase orders
 - Prepare a purchase order
     - User enters information about the purchase order, including part number, quantity, etc.
@@ -22,12 +45,14 @@ Functionality:
 
 ## API Endpoints
 
+### Index:
 path: '/', 
 methods: [ 'GET' ]
 
 **GET:** Returns the API documentation/GUI
 
 
+### Clients:
 
 path: '/clients'
 methods: [ 'GET', 'POST' ]
@@ -45,7 +70,6 @@ POST body:
 client_id is automatically generated.
 
 
-
 path: '/clients/id/:id',
 methods: [ 'GET', 'PUT', 'DELETE' ]
 
@@ -61,6 +85,7 @@ PUT body:
 |`client_city` | text  |
 
 
+### Parts:
 
 path: '/parts',
 methods: [ 'GET', 'POST' ]
@@ -77,7 +102,6 @@ POST body:
 |`quantity_on_hand` | int  |
 
 part_number is automatically generated.
-
 
 
 path: '/parts/number/:number'
@@ -97,8 +121,7 @@ PUT body:
 
 **DELETE:** Delete a part given the part number
 
-
-
+### Purchase Orders:
 
 path: '/pos',
 methods: [ 'GET', 'POST' ]
@@ -114,8 +137,6 @@ POST body:
 |`po_date` | date  |
 
 po_number is automatically generated.
-
-
 
 path: '/pos/number/:number',
 methods: [ 'GET', 'PUT', 'DELETE' ],
@@ -134,19 +155,18 @@ PUT body:
 **DELETE:** Delete a purchase order given the purchase order number
 
 
-
-path: '/pos/number/:number/lines',
-methods: [ 'GET' ],
-
-**GET:** Returns a list of purchase order lines given the purchase order number
-
-
-
 path: '/pos/number/:number/report',
 methods: [ 'GET' ],
 
 **GET:** Returns a report of a purchase order given the purchase order number
 
+
+### Purchase Order Lines:
+
+path: '/pos/number/:number/lines',
+methods: [ 'GET' ],
+
+**GET:** Returns a list of purchase order lines given the purchase order number
 
 
 path: '/lines',
@@ -168,7 +188,6 @@ POST body:
 line_number is automatically generated.
 
 
-
 path: '/lines/number/:number',
 methods: [ 'GET', 'DELETE' ],
 
@@ -177,12 +196,10 @@ methods: [ 'GET', 'DELETE' ],
 **DELETE:** Delete a purchase order line given the purchase order line number
 
 
-
 path: '/lines/po/:poNumber',
 methods: [ 'GET' ],
 
 **GET:** Returns a list of purchase order lines given the purchase order number
-
 
 
 ## Examples
@@ -253,10 +270,6 @@ Post body:
 
 `part_number` is automatically generated.
 
-##### Create a new purchase order:
-
-
-
 ### Technical Inventory
 * **Node.js**: A JavaScript runtime engine.
 * **Express**: A web application framework for Node.js.
@@ -269,11 +282,7 @@ Post body:
 Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting. Node.js is part of the "JavaScript everywhere" paradigm, unifying web application development around a single programming language, rather than different languages for server-side and client-side scripts. [Here is a guide to getting started with Node.js](https://nodejs.org/en/docs/guides/getting-started-guide/).
 
 
-### Express.js
-Express has been called the de facto standard server framework for Node.js. Express provides a minimal and flexible set of features for creating web applications and APIs. It provides a set of features like routing, middleware, view system, etc. It simplifies the server creation process that can be used to create a web application more easily and quickly. [Here is a guide to getting started with Express.js](https://expressjs.com/en/starter/installing.html).
-
-
-### Creating a .env file:
+### Editing the .env file:
 
 To store environment variables, create a .env file in the root directory of your project. The .env file should contain the following variables:
 
@@ -513,13 +522,11 @@ router.delete('/number/:number', function(req, res, next) {
 });
 ```
 
-
-
 ### Deployment:
 
 #### Github
 
-For ease of integration with Repl.it, I have deployed the application on Github. You can view the publi c repository [here](https://github.com/LiamOsler/postgres-express-REST)
+For ease of integration with Repl.it, I am mirroring the application on Github. You can view the public repository [here](https://github.com/LiamOsler/postgres-express-REST)
 
 #### Repl.it
 
