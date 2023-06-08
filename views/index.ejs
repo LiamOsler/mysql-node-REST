@@ -4,9 +4,174 @@
 
     <%- include ('partials/nav') %>
 
-    <div class="container-fluid bg-dark text-light p-5">
+    <div class="container-fluid bg-dark p-5">
 
-        <div class="container p-5" id="documentation">
+
+
+        <div class = "container p-5" id = "interface">
+            <div class = "row g-3">
+                <div class = "col-12 col-xl-6">
+                    <div class = "card p-3 h-100">    
+                        <h2>Clients</h2>
+                        <div class = "row g-3">
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "get-clients">
+                                    <h2>Get all clients:</h2>
+                                    <input class = "form-control" type="submit" value="Get">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "find-client">
+                                    <h2>Get by client ID:</h2>
+                                    <label for="user-id">client_id:</label><br>
+                                    <input class = "form-control" class = "form-control" type="text" id="client-id" name="client-id" required><br>
+                                    <input class = "form-control" class = "form-control" type="submit" value="Get">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "create-client">
+                                    <h2>Create new client:</h2>
+                                    <label for="client-name">Name:</label><br>
+                                    <input class = "form-control" type="text" id="client-name" name="client-name" required><br>
+                                    <label for="client-city">City:</label><br>
+                                    <input class = "form-control" type="text" id="client-city" name="client-city" required><br>
+                                    <input class = "form-control" type="submit" value="Post">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "update-client">
+                                    <h2>Update client:</h2>
+                                    <label for="client-id-update">client_id:</label><br>
+                                    <input class = "form-control" type="text" id="client-id-update" name="client-id-update" required><br>
+                                    <label for="client-name-update">Name:</label><br>
+                                    <input class = "form-control" type="text" id="client-name-update" name="client-name-update" required><br>
+                                    <label for="client-city-update">City:</label><br>
+                                    <input class = "form-control" type="text" id="client-city-update" name="client-city-update" required><br>
+                                    <input class = "form-control" type="submit" value="Put">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "delete-client">
+                                    <h2>Delete client:</h2>
+                                    <label for="client-id-delete">client_id:</label><br>
+                                    <input class = "form-control" type="text" id="client-id-delete" name="client-id-delete" required><br>
+                                    <input class = "form-control" type="submit" value="Delete">
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "col-12 col-xl-6">
+                    <div class = "card p-3 h-100">    
+                        <h2>Parts</h2>
+                        <div class = "row g-1">
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "get-parts">
+                                    <h2>Get all parts:</h2>
+                                    <input class = "form-control" type="submit" value="Submit">
+                                </form>
+                            </div>
+                            
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "find-part">
+                                    <h2>Get by part number:</h2>
+                                    <label for="part-number">part_number:</label><br>
+                                    <input class = "form-control" type="text" id="part-number" name="part-number" required><br>
+                                    <input class = "form-control" type="submit" value="Get">
+                                </form>
+                            </div>
+                            
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "create-part">
+                                    <h2>Create a new part:</h2>
+                                    <label for="part-name-create">Name:</label><br>
+                                    <input class = "form-control" type="text" id="part-name-create" name="part-name-create" required><br>
+                                    <label for="part-price-create">Price:</label><br>
+                                    <input class = "form-control" type="text" id="part-price-create" name="part-price-create" required><br>
+                                    <label for="part-description-create">Description:</label>
+                                    <input class = "form-control" type="text" id="part-description-create" name="part-description-create" required><br>
+                                    <label for="quantity-create">Quantity on Hand:</label>
+                                    <input class = "form-control" type="text" id="quantity-create" name="quantity-create" required><br>
+                                    <input class = "form-control" type="submit" value="Post">
+                                </form>
+                            </div>
+                            
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "update-part">
+                                    <h2>Update a part:</h2>
+                                    <label for="part-number-update">part_number:</label><br>
+                                    <input class = "form-control" type="text" id="part-number-update" name="part-number-update" required><br>
+                                    <label for="part-name-update">Name:</label><br>
+                                    <input class = "form-control" type="text" id="part-name-update" name="part-name-update" required><br>
+                                    <label for="part-price-update">Price:</label><br>
+                                    <input class = "form-control" type="text" id="part-price-update" name="part-price-update" required><br>
+                                    <label for="part-description-update">Description:</label>
+                                    <input class = "form-control" type="text" id="part-description-update" name="part-description-update" required><br>
+                                    <label for="quantity-update">Quantity on Hand:</label>
+                                    <input class = "form-control" type="text" id="quantity-update" name="quantity-update" required><br>
+                                    <input class = "form-control" type="submit" value="Update">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "delete-part">
+                                    <h2>Delete a part:</h2>
+                                    <label for="part-number-delete">part_number:</label><br>
+                                    <input class = "form-control" type="text" id="part-number-delete" name="part-number-delete" required><br>
+                                    <input class = "form-control" type="submit" value="Delete">
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "col-12 ">
+                    <div class = "card p-3 h-100">    
+                        <h2>Purchase Orders</h2>
+                        <div class = "row g-3">
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "get-pos">
+                                    <h2>Get all purchase orders:</h2>
+                                    <input class = "form-control" type="submit" value="Get">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                                <form class = "form-control h-100" id = "get-pos-number">
+                                    <h2>Get purchase order by purchase order number:</h2>
+                                    <label for="po-number-get">po_number:</label><br>
+                                    <input class = "form-control" type="text" id="po-number-get" name="po-number" required><br>
+                                    <input class = "form-control" type="submit" value="Get">
+                                </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id = "create-pos">
+                                  <h2>Create new purchase order:</h2>
+                                  <label for="po-customer-create">po_customer:</label><br>
+                                  <input class = "form-control" type="text" id="po-number-create" name="po-number-create" required><br>
+                                  <label for="po-date-create">po_date:</label><br>
+                                  <input class = "form-control" type="date" id="po-date-create" name="po-date-create" required><br>
+                                  <input class = "form-control" type="submit" value="Post">
+                              </form>
+                          </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div class="container p-5 text-light " id="documentation">
             <h1>Background</h1>
             <h2>Task:</h2>
             <p>Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.</p>
@@ -209,52 +374,187 @@
             
         </div>
 
-        <div class = "container p-5" id = "interface">
-            <h2>Clients</h2>
-            <h2>Get all clients:</h2>
-            <form id = "get-clients">
-              <input type="submit" value="Get">
-            </form>
-            <br>
-            <h2>Get by clientID:</h2>
-            <form id = "find-client">
-              <label for="user-id">Customer _id:</label><br>
-              <input type="text" id="client-id" name="client-id" required><br><br>
-              <input type="submit" value="Submit">
-            </form>
-            <br>
-            <h2>Create new client:</h2>
-            <form id = "create-client">
-                <label for="client-name">Client Name:</label><br>
-                <input type="text" id="client-name" name="client-name" required><br>
-                <label for="client-city">Client City:</label><br>
-                <input type="text" id="client-city" name="client-city" required><br><br>
-                <input type="submit" value="Submit">
-            </form>
-            <br>
-            <h2>Update client:</h2>
-            <form id = "update-client">
-                <label for="client-id-update">Client _id:</label><br>
-                <input type="text" id="client-id-update" name="client-id-update" required><br>
-                <label for="client-name-update">Client Name:</label><br>
-                <input type="text" id="client-name-update" name="client-name-update" required><br>
-                <label for="client-city-update">Client City:</label><br>
-                <input type="text" id="client-city-update" name="client-city-update" required><br><br>
-                <input type="submit" value="Submit">
-            </form>
-            <br>
-            <h2>Delete client:</h2>
-            <form id = "delete-client">
-                <label for="client-id-delete">Client _id:</label><br>
-                <input type="text" id="client-id-delete" name="client-id-delete" required><br><br>
-                <input type="submit" value="Submit">
-            </form>
-
-        </div>
-
     </div>
 
     <script>
+        var createPOS = document.getElementById('create-pos');
+        createPOS.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var poCustomer = document.getElementById('po-number-create').value;
+          var poDate = document.getElementById('po-date-create').value;
+          var poStatus = document.getElementById('po-status-create').value;
+        
+        }) 
+
+
+        var getPOs = document.getElementById('get-pos');
+        getPOs.addEventListener('submit', function(e) {
+          e.preventDefault();
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/pos/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Purchase Orders:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+
+        var getPONumber = document.getElementById('get-pos-number');
+        getPONumber.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var poNumber = document.getElementById('po-number-get').value;
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/pos/number/' + poNumber, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Purchase Orders:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+
+
+        var deletePart = document.getElementById('delete-part');
+        deletePart.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var partNumber = document.getElementById('part-number-delete').value;
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('DELETE', '/parts/number/' + partNumber, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Part Deleted:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+
+
+        var getParts = document.getElementById('get-parts');
+        getParts.addEventListener('submit', function(e) {
+          e.preventDefault();
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/parts/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Parts Found:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+
+        var findPart = document.getElementById('find-part');
+        findPart.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var partNumber = document.getElementById('part-number').value;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/parts/number/' + partNumber, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Parts Found:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+
+        var createPart = document.getElementById('create-part');
+        createPart.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var partName = document.getElementById('part-name-create').value;
+            var partPrice = document.getElementById('part-price-create').value;
+            var partDescription = document.getElementById('part-description-create').value;
+            var quantity = document.getElementById('quantity-create').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/parts/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Part Created:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+            };
+            xhr.send(JSON.stringify({
+                "part_name": partName,
+                "part_price": partPrice,
+                "part_description": partDescription,
+                "quantity": quantity
+            }));
+        });
+
+        var updatePart = document.getElementById('update-part');
+
+        updatePart.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var partNumber = document.getElementById('part-number-update').value;
+            var partName = document.getElementById('part-name-update').value;
+            var partPrice = document.getElementById('part-price-update').value;
+            var partDescription = document.getElementById('part-description-update').value;
+            var quantity = document.getElementById('quantity-update').value;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('PUT', '/parts/number/' + partNumber, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                alert('Part Updated:' + xhr.responseText);
+                } else {
+                    alert('Error: ' + xhr.responseText);
+                }
+            };
+            xhr.send(JSON.stringify({
+                "part_name": partName,
+                "part_price": partPrice,
+                "part_description": partDescription,
+                "quantity": quantity
+            }));
+        });
+
+
+
+        
+        var getClients = document.getElementById('get-clients');
+        getClients.addEventListener('submit', function(e) {
+          e.preventDefault();
+      
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/clients/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Clients Found:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+
+
         var findClient = document.getElementById('find-client');
         findClient.addEventListener('submit', function(e) {
           e.preventDefault();
@@ -265,31 +565,14 @@
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onload = function() {
             if (xhr.status === 200) {
-              alert('Client Found:' + xhr.responseText);
+                alert('Client Found:' + xhr.responseText);
             } else {
-              alert('Error: ' + xhr.status);
+                alert('Error: ' + xhr.responseText);
             }
           };
           xhr.send();
         });
       
-        var getClients = document.getElementById('get-clients');
-        
-        getClients.addEventListener('submit', function(e) {
-          e.preventDefault();
-      
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', '/clients/', true);
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.onload = function() {
-            if (xhr.status === 200) {
-              alert('Clients Found:' + xhr.responseText);
-            } else {
-              alert('Error: ' + xhr.status);
-            }
-          };
-          xhr.send();
-        });
 
         var createClient = document.getElementById('create-client');
         createClient.addEventListener('submit', function(e) {
@@ -304,7 +587,7 @@
             if (xhr.status === 200) {
               alert('Client Created:' + xhr.responseText);
             } else {
-              alert('Error: ' + xhr.status);
+                alert('Error: ' + xhr.responseText);
             }
           };
             xhr.send(JSON.stringify({client_name: clientName, client_city: clientCity}));
@@ -323,11 +606,11 @@
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onload = function() {
             if (xhr.status === 200) {
-              alert('Client Updated:' + xhr.responseText);
+                alert('Client Updated:' + xhr.responseText);
             } else {
-              alert('Error: ' + xhr.status);
-            }
-          };
+                alert('Error: ' + xhr.responseText);
+                }
+            };
             xhr.send(JSON.stringify({client_name: clientName, client_city: clientCity}));
         });
 
@@ -341,9 +624,9 @@
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onload = function() {
             if (xhr.status === 200) {
-              alert('Client Deleted:' + xhr.responseText);
+                alert('Client Deleted:' + xhr.responseText);
             } else {
-              alert('Error: ' + xhr.status);
+                alert('Error: ' + xhr.responseText);
             }
           };
           xhr.send();

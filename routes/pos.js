@@ -15,8 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    var poDate = req.body.po_date;
     var poCustomer = req.body.po_customer;
+    var poDate = req.body.po_date;
 
     db.any(`
         INSERT INTO public.pos925
@@ -85,9 +85,6 @@ router.delete('/number/:number', function(req, res, next) {
         }
     );
 });
-
-
-
 
 
 module.exports = router;
