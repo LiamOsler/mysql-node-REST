@@ -1,12 +1,18 @@
 # Background
 **Author:** Liam Osler
-**Date:** 2023-06-08
+**Date:** 2023-06-05
+**Course:** CSCI 4140
+**Assignment:** Assignment 2
+
 
 This project is a RESTful API that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
 
 ## Quick Start:
 Repository:
-https://github.com/LiamOsler/postgres-express-REST.git
+https://git.cs.dal.ca/osler/csci4140-assignment2
+
+Public Github repo for ease of access:
+https://github.com/LiamOsler/postgres-express-REST
 
 Replit deploy (includes documentation and GUI):
 https://postgres-express-rest.liamo2.repl.co/
@@ -15,15 +21,17 @@ https://postgres-express-rest.liamo2.repl.co/
 ### Run Locally:
 
 1. Clone the repository: 
-    `git clone https://github.com/LiamOsler/postgres-express-REST.git`
+    `git clone https://git.cs.dal.ca/osler/csci4140-assignment2.git`
 2. Import the postgres database dump from `dump.sql` to your postgres database
 3. Set the .env file to the correct database url and password
 4. Install dependencies: 
    `npm install`
 5. Start the server: `npm start`
-6. Navigate to 
+6. Navigate to [`http://localhost:4000`](http://localhost:4000) to see the index page and read this documentation.
+7. Use the API and GUI to interact with the database with the base URL 
    [`http://localhost:4000`](http://localhost:4000)
-7. Use the API and GUI to interact with the database with the base URL [`http://localhost:4000`](http://localhost:4000), e.g. [http://localhost:4000/parts](http://localhost:4000/parts)
+   e.g. 
+   [`http://localhost:4000/parts`](http://localhost:4000/parts)
 
 .env file (if your database is on localhost and the password is postgres)
 ```
@@ -301,6 +309,7 @@ curl --request POST \
 methods: [ 'GET', 'PUT', 'DELETE' ],
 
 **GET:** Returns a purchase order given the purchase order number
+
 
 **PUT:** Update a purchase order given the purchase order number
 
@@ -620,10 +629,90 @@ router.delete('/number/:number', function(req, res, next) {
 On the server, a function called purchaseorder is defined using the following code:
 
 ```sql
+CREATE OR REPLACE FUNCTION purchaseOrder (reqNumber int)
 
+RETURNS text AS $statement$
+
+declare
+	number int;
+  clientID int;
+  clientname text;
+  date text;
+  amount numeric;
+  lines text;
+
+BEGIN
+  -- SELECT * into number FROM pos925;
+  SELECT po_number, client_id, po_date into number, clientID, date FROM pos925 WHERE po_number = reqNumber;
+  
+  SELECT SUM(line_quantity * line_price) into amount as purchase_order_total
+  FROM lines925
+  GROUP BY po_number having po_number = reqNumber;
+
+  select  clients925.client_name into clientname
+  from pos925
+  join clients925 on pos925.client_id = clients925.client_id AND pos925.po_number = reqNumber;
+
+  SELECT ARRAY(SELECT CONCAT('line_number : ', line_number) || ', ' ||  CONCAT('line_price : ', line_price)  || ', ' || CONCAT('line_quantity : ', line_quantity) || ', ' ||  CONCAT('part_number : ', part_number)
+  FROM lines925
+  WHERE po_number = reqNumber
+  ) into lines;
+
+  if number is null then
+    RETURN (text('{error: No Purchase Order Found}'));
+  end if;
+
+  RETURN concat(
+        'po_number, client_name, date, lines', chr(10),
+        number, ',', clientname, ',', date, ',', lines
+    );
+END;
 ```
 
+This function is then called from the following route:
 
+```js
+router.get('/number/:number/report', function(req, res, next) {
+    var poNumber = req.params.number;
+    db.any(`
+        SELECT public.purchaseorder($1);
+        `, [poNumber])
+    .then(function(data) {
+            res.json(data);
+        }
+    )
+    .catch(function(error) {
+        res.json(error);
+    });
+});
+```
+
+You can call this route from the command line using curl:
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/pos/number/2/report
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/pos/number/2/report
+```
+
+And you will get a plaintext response like this:
+  
+```csv
+po_number, client_name, date, lines
+John Doe,2023-06-05,[{line_number : 11, line_price : 123.99, line_quantity : 2, part_number : 2},{line_number : 12, line_price : 123.99, line_quantity : 4, part_number : 2}]
+```
+
+OR 
+
+```json
+{error: "No Purchase Order Found"}
+```
+
+If the purchase order is not found.
 
 ### Deployment:
 

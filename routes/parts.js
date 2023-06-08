@@ -67,8 +67,7 @@ router.put('/number/:number', function(req, res, next) {
         UPDATE public.parts925
         SET part_name=$2, part_description=$3, quantity_on_hand=$4
         WHERE part_number=$1
-        RETURNING part_number, part_name, part_description, quantity_on_hand
-        ;
+        RETURNING part_number, part_name, part_description, quantity_on_hand;
     `, [partNumber, partName, partDescription, quantityOnHand])
     .then(function(data) {
         res.json(data);
