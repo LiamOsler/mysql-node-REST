@@ -22,6 +22,171 @@ Functionality:
 
 ## API Endpoints
 
+path: '/', 
+methods: [ 'GET' ]
+
+**GET:** Returns the API documentation/GUI
+
+
+
+path: '/clients'
+methods: [ 'GET', 'POST' ]
+
+**GET:** Returns a list of clients
+
+**POST:**   Create a new client
+
+POST body: 
+|Key|Value|
+|---|---|
+|`client_name`   | text |
+|`client_city` | text  |
+
+client_id is automatically generated.
+
+
+
+path: '/clients/id/:id',
+methods: [ 'GET', 'PUT', 'DELETE' ]
+
+**GET:** Returns a client given the client id
+
+**PUT:** Update a client given the client id
+
+PUT body:
+|Key|Value|
+|---|---|
+|`client_id`   | int |
+|`client_name`   | text |
+|`client_city` | text  |
+
+
+
+path: '/parts',
+methods: [ 'GET', 'POST' ]
+
+**GET:** Returns a list of parts
+
+**POST:** Create a new part
+
+POST body:
+|Key|Value|
+|---|---|
+|`part_name`   | text |
+|`part_description` | text  |
+|`quantity_on_hand` | int  |
+
+part_number is automatically generated.
+
+
+
+path: '/parts/number/:number'
+methods: [ 'GET', 'PUT', 'DELETE' ]
+
+**GET:** Returns a part given the part number
+
+**PUT:** Update a part given the part number
+
+PUT body:
+|Key|Value|
+|---|---|
+|`part_number`   | int |
+|`part_name`   | text |
+|`part_description` | text  |
+|`quantity_on_hand` | int  |
+
+**DELETE:** Delete a part given the part number
+
+
+
+
+path: '/pos',
+methods: [ 'GET', 'POST' ]
+
+**GET:** Returns a list of purchase orders
+
+**POST:** Create a new purchase order
+
+POST body:
+|Key|Value|
+|---|---|
+|`client_id`   | int |
+|`po_date` | date  |
+
+po_number is automatically generated.
+
+
+
+path: '/pos/number/:number',
+methods: [ 'GET', 'PUT', 'DELETE' ],
+
+**GET:** Returns a purchase order given the purchase order number
+
+**PUT:** Update a purchase order given the purchase order number
+
+PUT body:
+|Key|Value|
+|---|---|
+|`po_number`   | int |
+|`client_id`   | int |
+|`po_date` | date  |
+
+**DELETE:** Delete a purchase order given the purchase order number
+
+
+
+path: '/pos/number/:number/lines',
+methods: [ 'GET' ],
+
+**GET:** Returns a list of purchase order lines given the purchase order number
+
+
+
+path: '/pos/number/:number/report',
+methods: [ 'GET' ],
+
+**GET:** Returns a report of a purchase order given the purchase order number
+
+
+
+path: '/lines',
+methods: [ 'GET', 'POST' ],
+
+**GET:** Returns a list of purchase order lines
+
+**POST:** Create a new purchase order line
+
+POST body:
+
+|Key|Value|
+|---|---|
+|`po_number`   | int |
+|`part_number`   | int |
+|`quantity` | int  |
+|`line_price` | numeric  |
+
+line_number is automatically generated.
+
+
+
+path: '/lines/number/:number',
+methods: [ 'GET', 'DELETE' ],
+
+**GET:** Returns a purchase order line given the purchase order line number
+
+**DELETE:** Delete a purchase order line given the purchase order line number
+
+
+
+path: '/lines/po/:poNumber',
+methods: [ 'GET' ],
+
+**GET:** Returns a list of purchase order lines given the purchase order number
+
+
+
+## Examples
+
 ### GET
 
 ##### All parts:
