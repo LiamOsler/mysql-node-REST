@@ -4,11 +4,9 @@
 
     <%- include ('partials/nav') %>
 
-    <div class="container-fluid bg-dark p-5">
-
-
-
-        <div class = "container p-5" id = "interface">
+    <div class="container-fluid bg-dark pt-5">
+        <div class = "container-fluid pt-5" id = "interface">
+          	<h1 class = "text-white">Parts925 API GUI</h1>
             <div class = "row g-3">
                 <div class = "col-12 col-xl-6">
                     <div class = "card p-3 h-100">    
@@ -17,7 +15,7 @@
                             <div class = "col col-12 col-sm-6 col-lg-6">
                                 <form class = "form-control h-100" id = "get-clients">
                                     <h2>Get all clients:</h2>
-                                    <input class = "form-control" type="submit" value="Get">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Get">
                                 </form>
                             </div>
 
@@ -26,7 +24,7 @@
                                     <h2>Get by client ID:</h2>
                                     <label for="user-id">client_id:</label><br>
                                     <input class = "form-control" class = "form-control" type="text" id="client-id" name="client-id" required><br>
-                                    <input class = "form-control" class = "form-control" type="submit" value="Get">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Get">
                                 </form>
                             </div>
 
@@ -37,7 +35,7 @@
                                     <input class = "form-control" type="text" id="client-name" name="client-name" required><br>
                                     <label for="client-city">City:</label><br>
                                     <input class = "form-control" type="text" id="client-city" name="client-city" required><br>
-                                    <input class = "form-control" type="submit" value="Post">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Post">
                                 </form>
                             </div>
 
@@ -50,7 +48,7 @@
                                     <input class = "form-control" type="text" id="client-name-update" name="client-name-update" required><br>
                                     <label for="client-city-update">City:</label><br>
                                     <input class = "form-control" type="text" id="client-city-update" name="client-city-update" required><br>
-                                    <input class = "form-control" type="submit" value="Put">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Put">
                                 </form>
                             </div>
 
@@ -59,7 +57,7 @@
                                     <h2>Delete client:</h2>
                                     <label for="client-id-delete">client_id:</label><br>
                                     <input class = "form-control" type="text" id="client-id-delete" name="client-id-delete" required><br>
-                                    <input class = "form-control" type="submit" value="Delete">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Delete">
                                 </form>
                             </div>
 
@@ -74,7 +72,7 @@
                             <div class = "col col-12 col-sm-6 col-lg-6">
                                 <form class = "form-control h-100" id = "get-parts">
                                     <h2>Get all parts:</h2>
-                                    <input class = "form-control" type="submit" value="Submit">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Get">
                                 </form>
                             </div>
                             
@@ -83,7 +81,7 @@
                                     <h2>Get by part number:</h2>
                                     <label for="part-number">part_number:</label><br>
                                     <input class = "form-control" type="text" id="part-number" name="part-number" required><br>
-                                    <input class = "form-control" type="submit" value="Get">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Get">
                                 </form>
                             </div>
                             
@@ -98,7 +96,7 @@
                                     <input class = "form-control" type="text" id="part-description-create" name="part-description-create" required><br>
                                     <label for="quantity-create">Quantity on Hand:</label>
                                     <input class = "form-control" type="text" id="quantity-create" name="quantity-create" required><br>
-                                    <input class = "form-control" type="submit" value="Post">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Post">
                                 </form>
                             </div>
                             
@@ -115,7 +113,7 @@
                                     <input class = "form-control" type="text" id="part-description-update" name="part-description-update" required><br>
                                     <label for="quantity-update">Quantity on Hand:</label>
                                     <input class = "form-control" type="text" id="quantity-update" name="quantity-update" required><br>
-                                    <input class = "form-control" type="submit" value="Update">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Put">
                                 </form>
                             </div>
 
@@ -124,7 +122,7 @@
                                     <h2>Delete a part:</h2>
                                     <label for="part-number-delete">part_number:</label><br>
                                     <input class = "form-control" type="text" id="part-number-delete" name="part-number-delete" required><br>
-                                    <input class = "form-control" type="submit" value="Delete">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Delete">
                                 </form>
                             </div>
 
@@ -139,7 +137,7 @@
                             <div class = "col col-12 col-sm-6 col-lg-6">
                                 <form class = "form-control h-100" id = "get-pos">
                                     <h2>Get all purchase orders:</h2>
-                                    <input class = "form-control" type="submit" value="Get">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Get">
                                 </form>
                             </div>
 
@@ -148,7 +146,7 @@
                                     <h2>Get purchase order by purchase order number:</h2>
                                     <label for="po-number-get">po_number:</label><br>
                                     <input class = "form-control" type="text" id="po-number-get" name="po-number" required><br>
-                                    <input class = "form-control" type="submit" value="Get">
+                                    <input class = "form-control btn btn-primary" type="submit" value="Get">
                                 </form>
                             </div>
 
@@ -159,7 +157,7 @@
                                   <input class = "form-control" type="text" id="po-customer-create" name="po-customer-create" required><br>
                                   <label for="po-date-create">po_date:</label><br>
                                   <input class = "form-control" type="date" id="po-date-create" name="po-date-create" required><br>
-                                  <input class = "form-control" type="submit" value="Post">
+                                  <input class = "form-control btn btn-primary" type="submit" value="Post">
                               </form>
                             </div>
                             
@@ -172,12 +170,20 @@
                                 <input class = "form-control" type="text" id="po-customer-edit" name="po-customer-edit" required><br>
                                 <label for="po-date-edit">po_date:</label><br>
                                 <input class = "form-control" type="date" id="po-date-edit" name="po-date-edit" required><br>
-                                <input class = "form-control" type="submit" value="Update">
+                                <input class = "form-control btn btn-primary" type="submit" value="Put">
+                              </form>
+                            </div>
+
+                            
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id="get-all-lines"> 
+                                <h2>Get all lines</h2>
+                                <input class = "form-control btn btn-primary" type="submit" value="Get">
                               </form>
                             </div>
 
                             <div class = "col col-12 col-sm-6 col-lg-6">
-                              <form class = "form-control h-100" id = "edit-pos">
+                              <form class = "form-control h-100" id = "create-line">
                                 <h2>Add line to purchase order:</h2>
                                 <label for="po-number-add-line">po_number:</label><br>
                                 <input class = "form-control" type="text" id="po-number-add-line" name="po-number-add-line" required><br>
@@ -186,17 +192,43 @@
                                 <label for="quantity-add-line">quantity:</label><br>
                                 <input class = "form-control" type="text" id="quantity-add-line" name="quantity-add-line" required><br>
                                 <label for = "price-add-line">price:</label><br>
-                                
-                                <input class = "form-control" type="submit" value="Update">
+                                <input class = "form-control" type="text" id="price-add-line" name="price-add-line" required><br>
+                                <input class = "form-control btn btn-primary" type="submit" value="Post">
                               </form>
                             </div>
 
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id="get-line"> 
+                                <h2>Get line by line number:</h2>
+                                <label for="line-number-get">line_number:</label><br>
+                                <input class = "form-control" type="text" id="line-number-get" name="line-number-get" required><br>
+                                <input class = "form-control btn btn-primary" type="submit" value="Get">
+                              </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id = "delete-line">
+                                <h2>Delete line:</h2>
+                                <label for="line-number-delete">line_number:</label><br>
+                                <input class = "form-control" type="text" id="line-number-delete" name="line-number-delete" required><br>
+                                <input class = "form-control btn btn-primary" type="submit" value="Delete">
+                              </form>
+                            </div>
+
+                            <div class = "col col-12 col-sm-6 col-lg-6">
+                              <form class = "form-control h-100" id = "get-po-lines">
+                                <h2>Get all lines for a purchase order:</h2>
+                                <label for="po-number-lines">po_number:</label><br>
+                                <input class = "form-control" type="text" id="po-number-lines" name="po-number-lines" required><br>
+                                <input class = "form-control btn btn-primary" type="submit" value="Get">
+                              </form>
+                            </div>
+
+    
                         </div>
                     </div>
                 </div>
-                
             </div>
-
         </div>
 
         <div class="container p-5 text-light " id="documentation">
@@ -405,6 +437,97 @@
     </div>
 
     <script>
+          var createLine = document.getElementById('create-line');
+          createLine.addEventListener('submit', function(e){
+            e.preventDefault();
+            var poNumber = document.getElementById('po-number-add-line').value;
+            var partNumber = document.getElementById('part-number-add-line').value;
+            var quantity = document.getElementById('quantity-add-line').value;
+            var price = document.getElementById('price-add-line').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/lines/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+              if (xhr.status === 200) {
+                  alert('Line Created:' + xhr.responseText);
+              } else {
+                  alert('Error: ' + xhr.responseText);
+              }
+            };
+          xhr.send(JSON.stringify({po_number:poNumber, part_number:partNumber, quantity:quantity, price:price}));
+        })
+
+        var getLine = document.getElementById('get-line');
+        getLine.addEventListener('submit', function(e){
+          e.preventDefault();
+          var lineNumber = document.getElementById('line-number-get').value;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/lines/number/' + lineNumber, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Line Retrieved:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        })
+
+        getAllLines = document.getElementById('get-all-lines');
+        getAllLines.addEventListener('submit', function(e){
+          e.preventDefault();
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/lines/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Lines Retrieved:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+        
+        var getPOLines = document.getElementById('get-po-lines');
+        getPOLines.addEventListener('submit', function(e){
+          e.preventDefault();
+          var poNumber = document.getElementById('po-number-lines').value;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/pos/number/' + poNumber + '/lines/', true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Lines Retrieved:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        })
+
+        var deleteLine = document.getElementById('delete-line');
+        deleteLine.addEventListener('submit', function(e){
+          e.preventDefault();
+          var lineNumber = document.getElementById('line-number-delete').value;
+
+          var xhr = new XMLHttpRequest();
+          xhr.open('DELETE', '/lines/number/' + lineNumber, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Line Deleted:' + xhr.responseText);
+            } else {
+                alert('Error: ' + xhr.responseText);
+            }
+          };
+          xhr.send();
+        })
+
+
         var createPOS = document.getElementById('create-pos');
         createPOS.addEventListener('submit', function(e) {
           e.preventDefault();
@@ -425,7 +548,7 @@
         }) 
 
         var editPOS = document.getElementById('edit-pos');
-        editPOS.addEventListener('submit', function(e) {
+          editPOS.addEventListener('submit', function(e) {
           e.preventDefault();
           var poNumber = document.getElementById('po-number-edit').value;
           var poCustomer = document.getElementById('po-customer-edit').value;

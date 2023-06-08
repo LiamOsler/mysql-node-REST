@@ -35,13 +35,12 @@ router.post('/', function(req, res, next) {
 
 /* GET parts by part number */
 router.get('/number/:number', function(req, res, next) {
-    var partNumber = req.params.number;
-
+    var poNumber = req.params.number;
     db.any(`
         SELECT * 
         FROM public.pos925 
         WHERE "po_number" = $1
-        `, [partNumber])
+        `, [poNumber])
         .then(function(data) {
             res.json(data);
         })
@@ -49,6 +48,37 @@ router.get('/number/:number', function(req, res, next) {
             res.status(500);
             res.send(error);
         });
+});
+
+router.get('/number/:number/lines', function(req, res, next) {
+    var poNumber = req.params.number;
+    db.any(`
+        SELECT *
+        FROM public.lines925
+        WHERE "po_number" = $1
+        `, [poNumber])
+    .then(function(data) {
+            res.json(data);
+        }
+    )
+    .catch(function(error) {
+        res.json(error);
+    });
+});
+
+router.get('/number/:number/report', function(req, res, next) {
+    var poNumber = req.params.number;
+    db.any(`
+
+        
+        `, [poNumber])
+    .then(function(data) {
+            res.json(data);
+        }
+    )
+    .catch(function(error) {
+        res.json(error);
+    });
 });
 
 router.put('/number/:number', function(req, res, next) {
