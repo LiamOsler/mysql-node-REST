@@ -1,29 +1,62 @@
 # Background
-## Author: Liam Osler
-## Date: 2023-06-08
+**Author:** Liam Osler
+**Date:** 2023-06-08
 
 This project is a RESTful API that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
 
 ## Quick Start:
+Repository:
+https://github.com/LiamOsler/postgres-express-REST.git
+
+Replit deploy (includes documentation and GUI):
+https://postgres-express-rest.liamo2.repl.co/
+
 
 ### Run Locally:
 
-1. Clone the repository: `git clone https://github.com/LiamOsler/postgres-express-REST.git`
-2. Import the postgres database dump from `dump.sql`
+1. Clone the repository: 
+    `git clone https://github.com/LiamOsler/postgres-express-REST.git`
+2. Import the postgres database dump from `dump.sql` to your postgres database
 3. Set the .env file to the correct database url and password
-4. Install dependencies: `npm install`
+4. Install dependencies: 
+   `npm install`
 5. Start the server: `npm start`
-6. Navigate to [http://localhost:4000](http://localhost:4000)
-7. Use the API and GUI to interact with the database with the base URL [http://localhost:4000](http://localhost:4000), e.g. [http://localhost:4000/parts](http://localhost:4000/parts)
+6. Navigate to 
+   [`http://localhost:4000`](http://localhost:4000)
+7. Use the API and GUI to interact with the database with the base URL [`http://localhost:4000`](http://localhost:4000), e.g. [http://localhost:4000/parts](http://localhost:4000/parts)
+
+.env file (if your database is on localhost and the password is postgres)
+```
+DATABASE_URL=localhost
+DATABASE_PASSWORD=postgres
+```
+
+You can also change the db connection string in `database/db.js` to connect to your database.
+
+```javascript
+
+const dbPass = process.env.DB_PASS;
+const dbUrl = process.env.DB_URL;
+
+var db = pgp(`postgres://postgres:${dbPass}@${dbUrl}:5432/postgres`)
+```
+
+Modifying the port in `/bin/www` will allow you to change the port the server runs on.
+
+```javascript
+var port = normalizePort(process.env.PORT || '4000');
+app.set('port', port);
+```
+
 
 ### Run on Repl.it:
 
 1. Navigate to [https://repl.it/github/liamo2/postgres-express-rest](https://repl.it/github/liamo2/postgres-express-rest)
 2. Wait for the repl to start
-3. Use the API and GUI to interact with the database, e.g. [https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
+3. Use the REPLIT webview URL as the base URL for the REST API (See examples with CURL below), or visit the index page to interact with the database using the database.
 
 
-## Task:
+## Description:
 Create a web application that allows users to create, read, update and delete (CRUD) data from a Purchase Order database.
 
 Clients are able to 
@@ -33,20 +66,25 @@ Clients are able to
 - Query the status of a purchase order
 
 Functionality:
-- List parts for sale
+- Lists parts for sale
   - Returns list of parts, including part number, description, etc
-  - Excludes quantity on hand
+  - Excludes quantity on hand, etc
 - Find information about a specific part given the part number
 - List information about purchase orders
 - Prepare a purchase order
     - User enters information about the purchase order, including part number, quantity, etc.
 - Submit a purchase order by invocation of a method that takes the purchase order number as a parameter.
 
+### Technical Inventory
+* **Node.js**: A JavaScript runtime engine.
+* **Express**: A web application framework for Node.js.
+* **PostgreSQL**: An open-source relational database management system.
+
 
 ## API Endpoints
 
 ### Index:
-path: '/', 
+#### path: '/', 
 methods: [ 'GET' ]
 
 **GET:** Returns the API documentation/GUI
@@ -54,10 +92,20 @@ methods: [ 'GET' ]
 
 ### Clients:
 
-path: '/clients'
+#### path: '/clients'
 methods: [ 'GET', 'POST' ]
 
 **GET:** Returns a list of clients
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/clients
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/clients
+```
 
 **POST:**   Create a new client
 
@@ -69,11 +117,36 @@ POST body:
 
 client_id is automatically generated.
 
+```bash
+curl --request POST \
+  --url http://localhost:4000/clients \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_name="John Doe"&client_city="New York"'
+```
 
-path: '/clients/id/:id',
+```bash
+curl --request POST \
+  --url https://postgres-express-rest.liamo2.repl.co/clients \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_name="John Doe"&client_city="New York"'
+```
+
+
+#### path: '/clients/id/:id',
 methods: [ 'GET', 'PUT', 'DELETE' ]
 
 **GET:** Returns a client given the client id
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/clients/id/1
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/clients/id/1
+```
+
 
 **PUT:** Update a client given the client id
 
@@ -84,13 +157,37 @@ PUT body:
 |`client_name`   | text |
 |`client_city` | text  |
 
+```bash
+curl --request PUT \
+  --url http://localhost:4000/clients/id/1 \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_id=1&client_name=John Doe&client_city=New York'
+```
+
+```bash
+curl --request PUT \
+  --url https://postgres-express-rest.liamo2.repl.co/clients/id/1 \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_id=1&client_name=John Doe&client_city=New York'
+```
+
 
 ### Parts:
 
-path: '/parts',
+#### path: '/parts',
 methods: [ 'GET', 'POST' ]
 
 **GET:** Returns a list of parts
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/parts
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/parts
+```
 
 **POST:** Create a new part
 
@@ -101,13 +198,36 @@ POST body:
 |`part_description` | text  |
 |`quantity_on_hand` | int  |
 
-part_number is automatically generated.
+part_number is automatically generated and the new part or error is returned.
 
+```bash
+curl --request POST \
+  --url http://localhost:4000/parts \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'part_name=Ryzen 3600x&part_description=Ryzen 5 Processor&quantity_on_hand=10'
+```
 
-path: '/parts/number/:number'
+```bash
+curl --request POST \
+  --url https://postgres-express-rest.liamo2.repl.co/parts \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'part_name=Ryzen 3600x&part_description=Ryzen 5 Processor&quantity_on_hand=10'
+```
+
+#### path: '/parts/number/:number'
 methods: [ 'GET', 'PUT', 'DELETE' ]
 
 **GET:** Returns a part given the part number
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/parts/number/1
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/parts/number/1
+```
 
 **PUT:** Update a part given the part number
 
@@ -119,14 +239,39 @@ PUT body:
 |`part_description` | text  |
 |`quantity_on_hand` | int  |
 
+```bash
+curl --request PUT \
+  --url http://localhost:4000/parts/number/1 \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'part_number=1&part_name=Ryzen 3600x&part_description=Ryzen 5 Processor&quantity_on_hand=20'
+```
+
+```bash
+curl --request PUT \
+  --url https://postgres-express-rest.liamo2.repl.co/parts/number/1 \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'part_number=1&part_name=Ryzen 3600x&part_description=Ryzen 5 Processor&quantity_on_hand=20'
+```
+
+
 **DELETE:** Delete a part given the part number
 
 ### Purchase Orders:
 
-path: '/pos',
+#### path: '/pos',
 methods: [ 'GET', 'POST' ]
 
 **GET:** Returns a list of purchase orders
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/pos
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/pos
+```
 
 **POST:** Create a new purchase order
 
@@ -138,7 +283,21 @@ POST body:
 
 po_number is automatically generated.
 
-path: '/pos/number/:number',
+```bash
+curl --request POST \
+  --url http://localhost:4000/pos \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_id=1&po_date=2021-01-01'
+```
+
+```bash
+curl --request POST \
+  --url https://postgres-express-rest.liamo2.repl.co/pos \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_id=1&po_date=2021-01-01'
+```
+
+#### path: '/pos/number/:number',
 methods: [ 'GET', 'PUT', 'DELETE' ],
 
 **GET:** Returns a purchase order given the purchase order number
@@ -155,7 +314,7 @@ PUT body:
 **DELETE:** Delete a purchase order given the purchase order number
 
 
-path: '/pos/number/:number/report',
+#### path: '/pos/number/:number/report',
 methods: [ 'GET' ],
 
 **GET:** Returns a report of a purchase order given the purchase order number
@@ -163,13 +322,13 @@ methods: [ 'GET' ],
 
 ### Purchase Order Lines:
 
-path: '/pos/number/:number/lines',
+#### path: '/pos/number/:number/lines',
 methods: [ 'GET' ],
 
 **GET:** Returns a list of purchase order lines given the purchase order number
 
 
-path: '/lines',
+#### path: '/lines',
 methods: [ 'GET', 'POST' ],
 
 **GET:** Returns a list of purchase order lines
@@ -188,7 +347,7 @@ POST body:
 line_number is automatically generated.
 
 
-path: '/lines/number/:number',
+#### path: '/lines/number/:number',
 methods: [ 'GET', 'DELETE' ],
 
 **GET:** Returns a purchase order line given the purchase order line number
@@ -202,100 +361,15 @@ methods: [ 'GET' ],
 **GET:** Returns a list of purchase order lines given the purchase order number
 
 
-## Examples
+## Defining the REST middleware:
 
-### GET
+Middleware is defined in `app.js`. The middleware is used to parse the request body and to set up the routes. The routes are defined in:
+`routes/clients.js`.
+`routes/parts.js` 
+`routes/purchase_orders.js`.
+`routes/lines.js`.
 
-##### All parts:
-
-`/parts`
-
-ex:
-
-[http://localhost:3000/parts](http://localhost:3000/parts)
-
-[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
-
-
-##### Part by part number:
-
-`/parts/number/:number`
-
-ex:
-
-[http://localhost:4000/parts/number/1](http://localhost:4000/parts/number/1)
-
-[https://postgres-express-rest.liamo2.repl.co/parts/number/1](https://postgres-express-rest.liamo2.repl.co/parts/number/1)
-
-#### Purchase Orders:
-
-##### All purchase orders:
-
-`/pos`
-
-ex:
-
-[http://localhost:4000/pos](http://localhost:4000/pos)
-
-[https://postgres-express-rest.liamo2.repl.co/pos](https://postgres-express-rest.liamo2.repl.co/pos)
-
-##### Purchase order by purchase order number (po_number):
-
-`/pos/number/:number`
-
-ex:
-
-[http://localhost:4000/pos/number/1](http://localhost:4000/pos/number/1)
-
-[https://postgres-express-rest.liamo2.repl.co/pos/number/1](https://postgres-express-rest.liamo2.repl.co/pos/number/1)
-
-#### POST
-
-##### Create a new part:
-
-`/parts`
-
-ex:
-
-[http://localhost:4000/parts](http://localhost:4000/parts)
-
-[https://postgres-express-rest.liamo2.repl.co/parts](https://postgres-express-rest.liamo2.repl.co/parts)
-
-Post body:
-|Key|Value|
-|---|---|
-|`part_name`   | text |
-|`part_description` | text  |
-|`quantity_on_hand` | int  |
-
-`part_number` is automatically generated.
-
-### Technical Inventory
-* **Node.js**: A JavaScript runtime engine.
-* **Express**: A web application framework for Node.js.
-  * **EJS**: A templating engine for Node.js.
-* **PostgreSQL**: An open-source relational database management system.
-  * **Supabase**: A service that provides free database hosting for learning and prototyping.
-
-### Editing the .env file:
-
-To store environment variables, create a .env file in the root directory of your project. The .env file should contain the following variables:
-
-```
-DB_PASS=[your database password]
-DB_URL=[your database url]
-```
-
-If you are working with a local copy of the database, DB_URL will be something like localhost:5432. If you are working with a remote database, DB_URL will be something like [your-project-name].supabase.co
-
-### PostgreSQL
-
-Install the `pg-promise` package:
-
-
-## Querying the Database:
-
-A simple example of a query is retrieving all of the data from the `parts925` table. This can be done by specifying the route and the query in `routes/parts.js`:
+A simple example of a REST route is retrieving all of the data from the `parts925` table. This can be done by specifying the route and the query in `routes/parts.js`:
 ```js
 var express = require('express');
 var router = express.Router();
@@ -357,15 +431,24 @@ router.get('/number/:number', function(req, res, next) {
 This will provide a JSON response with the data from the `Parts925` table where the `part_number` is equal to 1:
 
 ```json
+[
+    {
+        "part_name": "Ryzen 3600x",
+        "part_number": 1,
+        "part_description": "Ryzen 5 Processors"
+    }
+]
 ```
 
-## Creating a new part:
+### Creating a new part:
 
 To create a new part, you will need to create a new route in `routes/parts.js`. This route will be a POST request to the `/` route. This route will accept the following parameters:
 
-part_name: string
-part_description: string
-quantity_on_hand: integer
+| Key | Value |
+| --- | --- |
+| `part_name` | string |
+| `part_description` | string |
+| `quantity_on_hand` | integer |
 
 ```js
 router.post('/', function(req, res, next) {
@@ -391,20 +474,21 @@ router.post('/', function(req, res, next) {
 });
 ```
 
-Updating a part:
+### Updating a part:
 
-To update a part, you will need to create a new route in `routes/parts.js`. This route will be a PUT request to the `/parts/number` route. This route will accept the following parameters:
+To update a part, you will need to create a new route in `routes/parts.js`. This route will be a PUT request to the `/parts/number` route.
 
-part_name: string
-part_description: string
-quantity_on_hand: integer
-
-Example: submit a PUT request to `/parts/number/1` with the following parameters:
+Example: submit a **PUT** request to `/parts/number/1` with the following parameters:
 |  Key | Value  |
 |---|---|
 |  part_name | text |
 |  part_description | text |
 |  quantity_on_hand | int |
+
+```bash
+curl --location --request PUT 'http://localhost:4000/parts/number/1' \
+
+```
 
 
 ```js
@@ -429,7 +513,47 @@ router.put('/number/:number', function(req, res, next) {
 });
 ```
 
-Retrieving a purchase order:
+This can be called from the front-end using the following code:
+
+```js
+var getParts = document.getElementById('get-parts');
+getParts.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/parts/', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+        alert('Parts Found:' + xhr.responseText);
+    } else {
+        alert('Error: ' + xhr.responseText);
+    }
+  };
+  xhr.send();
+});
+```
+Which references a form in the HTML called `get-parts`:
+```html
+<form id = "get-parts">
+    <h2>Get all parts:</h2>
+    <input type="submit" value="Get">
+</form>
+```
+
+You could also call this route using curl from the command line:
+
+```bash
+curl --request GET \
+  --url http://localhost:4000/parts
+```
+
+```bash
+curl --request GET \
+  --url https://postgres-express-rest.liamo2.repl.co/parts
+```
+
+### Retrieving a purchase order:
 
 ```js
 /* GET parts by part number */
@@ -492,6 +616,15 @@ router.delete('/number/:number', function(req, res, next) {
 });
 ```
 
+### Generating a purchase order:
+On the server, a function called purchaseorder is defined using the following code:
+
+```sql
+
+```
+
+
+
 ### Deployment:
 
 #### Github
@@ -504,16 +637,6 @@ For ease of access, I have deployed the application on the online IDE/deployment
 
 # References
 
-## Blogs, tutorials and videos:
-
 Net Ninja Express Tutorials:
 https://www.youtube.com/watch?v=yXEesONd_54
-
-## Documentation:
-
-Node.js:
-https://nodejs.org/en/
-
-Express:
-https://expressjs.com/en/guide/using-template-engines.html
 
